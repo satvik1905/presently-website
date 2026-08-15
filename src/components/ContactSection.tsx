@@ -3,7 +3,7 @@ import ContactForm from "./ContactForm";
 
 export default function ContactSection() {
   return (
-    <section id="contact" style={{ padding: "20px 0 88px" }}>
+    <section id="contact" style={{ paddingTop: 20 }}>
       <div className="container-w contact-grid">
         <div>
           <span className="pill">

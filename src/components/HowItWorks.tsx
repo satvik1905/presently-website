@@ -18,7 +18,6 @@ export default function HowItWorks() {
     <section
       id="how"
       style={{
-        padding: "88px 0",
         background: "var(--soft)",
         borderTop: "1px solid var(--line)",
         borderBottom: "1px solid var(--line)",

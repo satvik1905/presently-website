@@ -2,7 +2,7 @@ import { IconLayoutGrid } from "@tabler/icons-react";
 
 export default function Features() {
   return (
-    <section id="features" style={{ padding: "88px 0" }}>
+    <section id="features">
       <div className="container-w">
         <div className="sec-header">
           <div>

@@ -3,7 +3,7 @@ import ScrollButton from "./ScrollButton";
 
 export default function CtaBand() {
   return (
-    <section style={{ padding: "88px 0" }}>
+    <section>
       <div className="container-w">
         <div className="band">
           <div>

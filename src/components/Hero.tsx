@@ -35,7 +35,7 @@ export default function Hero() {
           Check-in for Kumon centers
         </span>
         <h1>
-          Check in, see everyone, <span>notify parents</span> — automatically.
+          Check in, see everyone, <span>notify parents.</span>{" "}<em>Automatically.</em>
         </h1>
         <p className="lead">
           Presently gives your center effortless student check-in, a live board

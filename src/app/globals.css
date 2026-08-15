@@ -21,7 +21,6 @@
   --color-background: #ffffff;
   --color-foreground: var(--ink);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 html { scroll-behavior: smooth; }
@@ -34,6 +33,8 @@ body {
 }
 
 a { color: inherit; text-decoration: none; }
+
+section { padding: 88px 0; }
 
 /* ── Container ── */
 .container-w {
@@ -334,8 +335,8 @@ a { color: inherit; text-decoration: none; }
   font-variant-numeric: tabular-nums;
   color: var(--green);
 }
-.mrow .tm-warn { color: var(--amber); }
-.mrow .tm-over { color: var(--red); }
+.mrow .tm.tm-warn { color: var(--amber); }
+.mrow .tm.tm-over { color: var(--red); }
 .tag-label {
   font-size: 8.5px;
   font-weight: 600;
@@ -629,10 +630,11 @@ textarea.in { resize: vertical; min-height: 80px; }
   color: var(--green);
   font-size: 14px;
   text-align: center;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   gap: 5px;
+  width: 100%;
 }
 .form-success svg { width: 16px; height: 16px; }
 

@@ -3,14 +3,14 @@ import ScrollReveal from "./ScrollReveal";
 export default function Features() {
   return (
     <section id="features">
-      <div className="wrap">
+      <div className="wrap wrap-wide">
+        <div className="feats-container">
         <span className="stamp">BUILT FOR CENTER DIRECTORS</span>
         <h2>The boring parts of running a center, handled.</h2>
         <p className="sec-lede">
           Attendance is a safety record, a staffing signal, and a parent-trust
           issue all at once. Presently treats it that way.
         </p>
-
         <div className="feats">
           <ScrollReveal className="feat">
             <div className="ico" aria-hidden="true">
@@ -100,6 +100,7 @@ export default function Features() {
               in.
             </p>
           </ScrollReveal>
+        </div>
         </div>
       </div>
     </section>

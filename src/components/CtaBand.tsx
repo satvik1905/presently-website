@@ -1,24 +1,31 @@
-import ScrollReveal from "./ScrollReveal";
+import CtaForm from "./CtaForm";
 
 export default function CtaBand() {
   return (
     <section id="demo">
       <div className="wrap">
-        <ScrollReveal className="cta-band">
-          <div>
-            <span className="stamp">6:00 PM — CLOSING TIME</span>
-            <h2>End the day with an empty board.</h2>
+        <div className="cta-split">
+          <div className="cta-left">
+            <span className="stamp">STOP WONDERING WHO&rsquo;S STILL HERE</span>
+            <h2>
+              Two seconds to check in.{" "}
+              <em>Zero reasons to worry.</em>
+            </h2>
             <p>
-              See Presently running on real center workflows in a 20-minute
-              walkthrough — check-in, the live board, parent texts, and reports.
+              Get a 20-minute walkthrough on your center&rsquo;s workflow —
+              check-in, the live board, parent texts, and reports. No
+              commitment.
             </p>
+            <ul className="cta-checks">
+              <li>Works on the iPad at your front desk</li>
+              <li>Set up in an afternoon, not a quarter</li>
+              <li>Parents get texts, not another app to install</li>
+            </ul>
           </div>
-          <div className="actions">
-            <a className="btn btn-on-blue btn-lg" href="#">
-              Book a demo
-            </a>
+          <div className="cta-right">
+            <CtaForm />
           </div>
-        </ScrollReveal>
+        </div>
       </div>
     </section>
   );

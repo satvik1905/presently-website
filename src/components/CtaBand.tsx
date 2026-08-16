@@ -1,63 +1,24 @@
-import { IconRocket } from "@tabler/icons-react";
-import ScrollButton from "./ScrollButton";
+import ScrollReveal from "./ScrollReveal";
 
 export default function CtaBand() {
   return (
-    <section>
-      <div className="container-w">
-        <div className="band">
+    <section id="demo">
+      <div className="wrap">
+        <ScrollReveal className="cta-band">
           <div>
-            <span className="pill">
-              <IconRocket size={13} />
-              Start now
-            </span>
-            <h2>See, understand, and trust your busy hour.</h2>
+            <span className="stamp">6:00 PM — CLOSING TIME</span>
+            <h2>End the day with an empty board.</h2>
             <p>
-              Presently runs the front desk so your staff can run the center. See
-              it live at your center — it takes fifteen minutes.
+              See Presently running on real center workflows in a 20-minute
+              walkthrough — check-in, the live board, parent texts, and reports.
             </p>
-            <ScrollButton targetId="contact" className="btn-w">
+          </div>
+          <div className="actions">
+            <a className="btn btn-on-blue btn-lg" href="#">
               Book a demo
-            </ScrollButton>
+            </a>
           </div>
-
-          <div className="mock" aria-hidden="true">
-            <div className="mh">
-              <span className="t">Kumon of Carmel</span>
-              <span className="lv">● Live &middot; 3:42 PM</span>
-            </div>
-            <div className="mrow">
-              <div>
-                <div className="nm">
-                  Emma Johnson <span className="tag-label">Connect</span>
-                </div>
-                <div className="su">Reading</div>
-              </div>
-              <span className="tm">12:04</span>
-            </div>
-            <div className="mrow">
-              <div>
-                <div className="nm">Liam Rivera</div>
-                <div className="su">Math</div>
-              </div>
-              <span className="tm tm-warn">24:10</span>
-            </div>
-            <div className="mrow">
-              <div>
-                <div className="nm">Aisha Patel</div>
-                <div className="su">Math &amp; Reading</div>
-              </div>
-              <span className="tm tm-over">34:57</span>
-            </div>
-            <div className="mrow">
-              <div>
-                <div className="nm">Noah Kim</div>
-                <div className="su">Math</div>
-              </div>
-              <span className="tm">06:18</span>
-            </div>
-          </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

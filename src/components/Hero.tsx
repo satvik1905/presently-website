@@ -1,56 +1,34 @@
-import {
-  IconSparkles,
-  IconScan,
-  IconUserCheck,
-  IconClock,
-  IconBellRinging,
-} from "@tabler/icons-react";
-import ScrollButton from "./ScrollButton";
+import LiveBoard from "./LiveBoard";
 
 export default function Hero() {
   return (
-    <div className="hero">
-      <div className="arcs" aria-hidden="true">
-        <div className="arc arc-1" />
-        <div className="arc arc-2" />
-        <div className="arc arc-3" />
-      </div>
-
-      <span className="chip chip-1" aria-hidden="true">
-        <IconScan />
-      </span>
-      <span className="chip chip-2" aria-hidden="true">
-        <IconUserCheck />
-      </span>
-      <span className="chip chip-3" aria-hidden="true">
-        <IconClock />
-      </span>
-      <span className="chip chip-4" aria-hidden="true">
-        <IconBellRinging />
-      </span>
-
-      <div className="hero-inner">
-        <span className="pill">
-          <IconSparkles size={13} />
-          Check-in for Kumon centers
-        </span>
-        <h1>
-          Check in, see everyone, <span>notify parents.</span>{" "}<em>Automatically.</em>
-        </h1>
-        <p className="lead">
-          Presently gives your center effortless student check-in, a live board
-          of who&rsquo;s here, and automatic texts to parents. The busy hour,
-          finally calm.
-        </p>
-        <div className="cta">
-          <ScrollButton targetId="contact" className="btn">
-            Book a demo
-          </ScrollButton>
-          <ScrollButton targetId="how" className="btn-o">
-            See how it works
-          </ScrollButton>
+    <section className="hero">
+      <div className="wrap hero-grid">
+        <div>
+          <span className="stamp">CHECK-IN FOR LEARNING CENTERS</span>
+          <h1>
+            Every student in your center, <em>accounted for.</em>
+          </h1>
+          <p className="lede">
+            Presently replaces the paper sign-in sheet with a two-second
+            check-in, a live board of who&rsquo;s here right now, and an
+            automatic text to every parent.
+          </p>
+          <div className="hero-ctas">
+            <a className="btn btn-primary btn-lg" href="#demo">
+              Book a demo
+            </a>
+            <a className="btn btn-ghost btn-lg" href="#how">
+              See how it works
+            </a>
+          </div>
+          <p className="hero-note">
+            Web-based. Works on the iPad at your front desk. No new hardware.
+          </p>
         </div>
+
+        <LiveBoard />
       </div>
-    </div>
+    </section>
   );
 }

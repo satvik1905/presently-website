@@ -917,7 +917,6 @@ blockquote {
 /* ── Footer ── */
 footer {
   padding: 44px 0 56px;
-  border-top: 1px solid var(--line);
   margin-top: 88px;
 }
 .foot {

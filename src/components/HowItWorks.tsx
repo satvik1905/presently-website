@@ -11,7 +11,7 @@ export default function HowItWorks() {
         </h2>
         <p className="sec-lede">
           Presently follows the same path your students do. Each step triggers
-          the next — no one at your front desk has to remember anything.
+          the next, so no one at your front desk has to remember anything.
         </p>
 
         <SyncedSteps>

@@ -14,7 +14,7 @@ export default function Quote() {
               I used to walk the rooms with a printout during pickup rush. Now I
               glance at one screen and know exactly who&rsquo;s still here.
             </blockquote>
-            <cite>Center director — placeholder quote</cite>
+            <cite>Center director, placeholder quote</cite>
           </div>
         </ScrollReveal>
       </div>

@@ -12,7 +12,7 @@ export default function ContactSection() {
           </span>
           <h2>See Presently at your center.</h2>
           <p className="sub">
-            Tell us about your center and we&rsquo;ll set up a quick demo — no
+            Tell us about your center and we&rsquo;ll set up a quick demo. No
             commitment.
           </p>
           <p className="mail-link">

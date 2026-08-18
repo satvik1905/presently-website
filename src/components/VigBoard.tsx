@@ -78,7 +78,7 @@ export default function VigBoard() {
         <span>
           <span className="name">Jonah K.</span>
           <span className="sub">
-            {jonahOver ? "Over limit — time to dismiss" : "Math · 30 min limit"}
+            {jonahOver ? "Over limit - time to dismiss" : "Math · 30 min limit"}
           </span>
         </span>
         <span className="t">{fmt(jonahTime)}</span>

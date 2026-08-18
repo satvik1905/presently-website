@@ -29,7 +29,7 @@ export default function Features() {
             </div>
             <h3>Session time limits</h3>
             <p>
-              Set a limit per student — 30 minutes for one subject, 60 for two.
+              Set a limit per student: 30 minutes for one subject, 60 for two.
               Over-limit students are flagged in amber, and staff can add time in
               one tap.
             </p>
@@ -72,7 +72,7 @@ export default function Features() {
             <h3>Records that keep themselves</h3>
             <p>
               Every session is logged the moment it happens. Attendance reports,
-              session averages, and exports — two years of history, always
+              session averages, and exports. Two years of history, always
               current.
             </p>
           </ScrollReveal>
@@ -96,7 +96,7 @@ export default function Features() {
             <h3>Multi-center from day one</h3>
             <p>
               Run one location or twelve. Owners see across their centers;
-              directors and staff see exactly their own — role-based access built
+              directors and staff see exactly their own. Role-based access built
               in.
             </p>
           </ScrollReveal>

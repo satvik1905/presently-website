@@ -8,7 +8,7 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Presently — Check-in for Kumon centers",
+  title: "Presently - Check-in for Kumon centers",
   description:
     "Presently is the student check-in system for Kumon centers. Fast check-in, a live board of who's here, and automatic parent notifications.",
 };

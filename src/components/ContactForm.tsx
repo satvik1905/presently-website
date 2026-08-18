@@ -68,7 +68,7 @@ export default function ContactForm() {
       {submitted && (
         <p className="form-success">
           <IconCircleCheck size={16} />
-          Thanks — we&rsquo;ll be in touch shortly.
+          Thanks! We&rsquo;ll be in touch shortly.
         </p>
       )}
     </div>

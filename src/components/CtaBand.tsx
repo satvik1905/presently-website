@@ -12,7 +12,7 @@ export default function CtaBand() {
               <em>Zero reasons to worry.</em>
             </h2>
             <p>
-              Get a 20-minute walkthrough on your center&rsquo;s workflow —
+              Get a 20-minute walkthrough on your center&rsquo;s workflow:
               check-in, the live board, parent texts, and reports. No
               commitment.
             </p>

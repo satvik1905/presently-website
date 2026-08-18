@@ -63,7 +63,7 @@ export default function ContactForm() {
         placeholder="Tell us about your center"
       />
       <button className="btn" onClick={handleSubmit}>
-        Book a demo
+        Request a demo
       </button>
       {submitted && (
         <p className="form-success">

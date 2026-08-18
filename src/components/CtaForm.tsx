@@ -8,7 +8,7 @@ export default function CtaForm() {
     lastName: "",
     email: "",
     centerName: "",
-    students: "1 – 25",
+    students: "1",
     notes: "",
   });
 
@@ -31,14 +31,14 @@ export default function CtaForm() {
       }}
     >
       <div className="cta-form-header">
-        <h3>Book a demo</h3>
+        <h3>Request a demo</h3>
         <p>We&rsquo;ll reach out within one business day.</p>
       </div>
 
       <div className="cta-field">
         <div className="cta-form-row">
           <div>
-            <label className="cta-label">First name</label>
+            <label className="cta-label">Instructor&rsquo;s first name</label>
             <input
               type="text"
               placeholder="Maya"
@@ -49,7 +49,7 @@ export default function CtaForm() {
             />
           </div>
           <div>
-            <label className="cta-label">Last name</label>
+            <label className="cta-label">Instructor&rsquo;s last name</label>
             <input
               type="text"
               placeholder="Rodriguez"
@@ -87,16 +87,16 @@ export default function CtaForm() {
       </div>
 
       <div className="cta-field">
-        <label className="cta-label">How many students visit per day?</label>
+        <label className="cta-label">How many centers do you operate?</label>
         <select
           className="cta-input cta-select"
           value={form.students}
           onChange={(e) => update("students", e.target.value)}
         >
-          <option>1 – 25</option>
-          <option>26 – 50</option>
-          <option>51 – 100</option>
-          <option>100+</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4+</option>
         </select>
       </div>
 
@@ -111,7 +111,7 @@ export default function CtaForm() {
       </div>
 
       <button type="submit" className="btn btn-primary cta-submit" disabled={!filled}>
-        Book a demo
+        Request a demo
       </button>
       <p className="cta-fine">No credit card. No 14-day trial clock.</p>
     </form>

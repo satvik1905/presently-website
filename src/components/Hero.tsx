@@ -16,7 +16,7 @@ export default function Hero() {
           </p>
           <div className="hero-ctas">
             <a className="btn btn-primary btn-lg" href="#demo">
-              Book a demo
+              Request a demo
             </a>
             <a className="btn btn-ghost btn-lg" href="#how">
               See how it works

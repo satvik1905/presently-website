@@ -19,9 +19,9 @@ export default function HowItWorks() {
           <div className="step">
             <div className="vig vig-scan" aria-hidden="true">
               <span className="chip chip-pop">✓ Checked in · Maya R.</span>
-              <div className="iphone">
-                <div className="dynamic-island" />
-                <div className="iphone-screen">
+              <div className="ipad">
+                <div className="ipad-cam" />
+                <div className="ipad-screen">
                   <span className="iphone-label">Scan to check in</span>
                   <span className="screen-check">✓</span>
                   <div className="scan-line" />
@@ -30,8 +30,8 @@ export default function HowItWorks() {
               </div>
               <div className="qr">
                 <svg
-                  width="36"
-                  height="36"
+                  width="28"
+                  height="28"
                   viewBox="0 0 21 21"
                   fill="#101828"
                   aria-hidden="true"

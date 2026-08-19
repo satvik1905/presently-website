@@ -1523,7 +1523,7 @@ blockquote {
 .footer-tagline {
   font-size: 14px;
   line-height: 1.5;
-  color: rgba(255,255,255,0.45);
+  color: #FDFDFD;
 }
 .footer-columns {
   display: flex;
@@ -1544,7 +1544,7 @@ blockquote {
 }
 .footer-col a {
   font-size: 14px;
-  color: rgba(255,255,255,0.6);
+  color: #B1B5C3;
   text-decoration: none;
   transition: color 0.15s ease;
 }
@@ -1554,7 +1554,7 @@ blockquote {
 }
 .footer-bar-inner {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding-top: 16px;
   padding-bottom: 16px;

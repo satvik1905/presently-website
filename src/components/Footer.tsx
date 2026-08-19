@@ -22,24 +22,21 @@ export default function Footer() {
 
         <div className="footer-columns">
           <div className="footer-col">
-            <h4 className="footer-col-head">Product</h4>
             <a href="#how">How it works</a>
             <a href="/features">Features</a>
             <a href="#demo">Demo</a>
             <a href="/partner">Pricing</a>
           </div>
           <div className="footer-col">
-            <h4 className="footer-col-head">Company</h4>
             <a href="/partner">Partner</a>
             <a href="#demo">Contact</a>
-            <a href="#">Privacy</a>
           </div>
         </div>
       </div>
 
       <div className="footer-bar">
         <div className="wrap footer-bar-inner">
-          <span>&copy; 2026 Presently</span>
+          <span>&copy; 2026 Presently. All rights reserved.</span>
         </div>
       </div>
     </footer>

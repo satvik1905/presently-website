@@ -1252,16 +1252,6 @@ footer {
   overflow: hidden;
   background: var(--bg);
 }
-.feat-canvas {
-  position: absolute;
-  width: 2400px;
-  height: 1600px;
-  top: 0;
-  left: 0;
-  transform-origin: 0 0;
-  will-change: transform;
-  transition: transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.3s ease;
-}
 .feat-canvas-bg {
   position: absolute;
   inset: 0;
@@ -1284,6 +1274,11 @@ footer {
   text-align: center;
   pointer-events: none;
   z-index: 0;
+  transition: opacity 0.3s ease 0.4s;
+}
+.feat-center-hidden {
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 .feat-center-mark {
   display: block;
@@ -1300,8 +1295,6 @@ footer {
   margin-top: 8px;
   opacity: 0.15;
 }
-.feat-zoomed .feat-center { opacity: 0; transition: opacity 0.3s ease; }
-.feat-canvas:not(.feat-zoomed) .feat-center { opacity: 1; transition: opacity 0.3s ease 0.4s; }
 
 /* Cluster nodes */
 .feat-cluster {
@@ -1551,7 +1544,6 @@ footer {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .feat-canvas,
   .feat-detail,
   .feat-detail-desc,
   .feat-sub-card,

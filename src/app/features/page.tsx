@@ -1,6 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import {
+  TransformWrapper,
+  TransformComponent,
+  useControls,
+} from "react-zoom-pan-pinch";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -290,52 +295,191 @@ const SUB_ICONS: Record<string, React.ReactNode> = {
   ),
 };
 
-/* ── Component ── */
+/* ── Canvas internals (needs useControls context) ── */
+
+function CanvasContent({
+  active,
+  setActive,
+  entrance,
+  nodeRefs,
+}: {
+  active: number | null;
+  setActive: (id: number | null) => void;
+  entrance: "hidden" | "entering" | "done";
+  nodeRefs: React.MutableRefObject<Record<number, HTMLDivElement | null>>;
+}) {
+  const { zoomToElement, resetTransform } = useControls();
+
+  function handleNodeClick(id: number) {
+    if (active === id) {
+      setActive(null);
+      resetTransform(700, "easeOut");
+    } else {
+      setActive(id);
+      const el = nodeRefs.current[id];
+      if (el) {
+        zoomToElement(el, 1, 700, "easeOut");
+      }
+    }
+  }
+
+  function handleBack() {
+    setActive(null);
+    resetTransform(700, "easeOut");
+  }
+
+  // Escape key
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && active !== null) {
+        handleBack();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active]);
+
+  return (
+    <>
+      {/* Back button */}
+      <button
+        className={`btn btn-ghost feat-back${active !== null ? " feat-back-visible" : ""}`}
+        onClick={handleBack}
+      >
+        &larr; Back to overview
+      </button>
+
+      {/* Clickable background to dismiss */}
+      <div
+        className="feat-canvas-bg"
+        onClick={() => active !== null && handleBack()}
+      />
+
+      {/* Connector lines */}
+      <svg
+        className="feat-lines"
+        viewBox={`0 0 ${CANVAS_W} ${CANVAS_H}`}
+        fill="none"
+      >
+        {CONNECTIONS.map(([a, b]) => (
+          <line
+            key={`${a}-${b}`}
+            x1={CLUSTERS[a].x}
+            y1={CLUSTERS[a].y}
+            x2={CLUSTERS[b].x}
+            y2={CLUSTERS[b].y}
+            stroke="var(--line)"
+            strokeWidth="1"
+            strokeDasharray="6 8"
+          />
+        ))}
+      </svg>
+
+      {/* Center wordmark */}
+      <div className={`feat-center${active !== null ? " feat-center-hidden" : ""}`}>
+        <span className="feat-center-mark">PRESENTLY</span>
+        <span className="feat-center-tag">
+          Know who&rsquo;s here. Know who&rsquo;s ready.
+        </span>
+      </div>
+
+      {/* Cluster groups */}
+      {CLUSTERS.map((cluster) => (
+        <div
+          key={cluster.id}
+          className="feat-cluster"
+          style={{ left: cluster.x, top: cluster.y }}
+          ref={(el) => { nodeRefs.current[cluster.id] = el; }}
+        >
+          <button
+            className={`feat-node${active === cluster.id ? " feat-node-active" : ""}${entrance !== "hidden" ? " feat-node-visible" : " feat-node-enter"}`}
+            style={
+              entrance === "entering"
+                ? { transitionDelay: `${(cluster.id - 1) * 80}ms` }
+                : undefined
+            }
+            onClick={(e) => {
+              e.stopPropagation();
+              handleNodeClick(cluster.id);
+            }}
+            aria-label={`View ${cluster.title} features`}
+          >
+            <span className="feat-badge">{cluster.id}</span>
+            <div className="feat-ico">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--blue)"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                {CLUSTER_ICONS[cluster.id]}
+              </svg>
+            </div>
+            <span className="feat-node-title">{cluster.title}</span>
+          </button>
+
+          <div
+            className={`feat-detail${active === cluster.id ? " feat-detail-show" : ""}`}
+          >
+            <p className="feat-detail-desc">{cluster.desc}</p>
+            <div className="feat-sub-grid">
+              {cluster.features.map((f, i) => (
+                <div className="feat-sub-card" key={i}>
+                  <div className="feat-sub-ico">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="var(--blue)"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      {SUB_ICONS[f.icon]}
+                    </svg>
+                  </div>
+                  <div>
+                    <h4>{f.title}</h4>
+                    <p>{f.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </>
+  );
+}
+
+/* ── Page Component ── */
 
 export default function FeaturesPage() {
   const [active, setActive] = useState<number | null>(null);
   const [mobileOpen, setMobileOpen] = useState<number | null>(null);
-  const [vp, setVp] = useState({ w: 1440, h: 832 });
-  const [ready, setReady] = useState(false);
-  const [entrance, setEntrance] = useState<"hidden" | "entering" | "done">("hidden");
+  const [entrance, setEntrance] = useState<"hidden" | "entering" | "done">(
+    "hidden"
+  );
+  const [initialScale, setInitialScale] = useState(0.4);
+  const nodeRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
   useEffect(() => {
-    const update = () =>
-      setVp({ w: window.innerWidth, h: window.innerHeight - NAV_H });
-    update();
-    setReady(true);
-    // Stagger entrance after canvas fades in
-    const t1 = setTimeout(() => setEntrance("entering"), 100);
-    // Remove stagger delays after entrance completes
-    const t2 = setTimeout(() => setEntrance("done"), 900);
-    window.addEventListener("resize", update);
+    const vh = window.innerHeight - NAV_H;
+    const vw = window.innerWidth;
+    setInitialScale(Math.min(vw / CANVAS_W, vh / CANVAS_H) * 0.85);
+    const t1 = setTimeout(() => setEntrance("entering"), 200);
+    const t2 = setTimeout(() => setEntrance("done"), 1000);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
-      window.removeEventListener("resize", update);
     };
   }, []);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setActive(null);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
-
-  function getTransform() {
-    if (active === null) {
-      const s = Math.min(vp.w / CANVAS_W, vp.h / CANVAS_H) * 0.85;
-      const tx = (vp.w - CANVAS_W * s) / 2;
-      const ty = (vp.h - CANVAS_H * s) / 2;
-      return `translate(${tx}px, ${ty}px) scale(${s})`;
-    }
-    const c = CLUSTERS[active - 1];
-    const tx = vp.w / 2 - c.x;
-    const ty = vp.h / 2 - c.y - 80;
-    return `translate(${tx}px, ${ty}px) scale(1)`;
-  }
 
   return (
     <>
@@ -348,122 +492,36 @@ export default function FeaturesPage() {
 
       {/* ── Desktop Canvas ── */}
       <div className="feat-vp">
-        <button
-          className={`btn btn-ghost feat-back${active !== null ? " feat-back-visible" : ""}`}
-          onClick={() => setActive(null)}
+        <TransformWrapper
+          initialScale={initialScale}
+          minScale={0.3}
+          maxScale={1.2}
+          centerOnInit
+          panning={{ disabled: true }}
+          pinch={{ disabled: true }}
+          wheel={{ disabled: true }}
+          doubleClick={{ disabled: true }}
+          zoomAnimation={{ animationTime: 700, animationType: "easeOut" }}
+          limitToBounds={false}
         >
-          &larr; Back to overview
-        </button>
-
-        <div
-          className={`feat-canvas${active !== null ? " feat-zoomed" : ""}`}
-          role="region"
-          aria-label="Feature explorer"
-          style={{
-            transform: getTransform(),
-            opacity: ready ? 1 : 0,
-          }}
-        >
-          {/* Clickable background to dismiss */}
-          <div
-            className="feat-canvas-bg"
-            onClick={() => active !== null && setActive(null)}
-          />
-
-          {/* Connector lines */}
-          <svg
-            className="feat-lines"
-            viewBox={`0 0 ${CANVAS_W} ${CANVAS_H}`}
-            fill="none"
+          <TransformComponent
+            wrapperStyle={{
+              width: "100%",
+              height: "100%",
+            }}
+            contentStyle={{
+              width: CANVAS_W,
+              height: CANVAS_H,
+            }}
           >
-            {CONNECTIONS.map(([a, b]) => (
-              <line
-                key={`${a}-${b}`}
-                x1={CLUSTERS[a].x}
-                y1={CLUSTERS[a].y}
-                x2={CLUSTERS[b].x}
-                y2={CLUSTERS[b].y}
-                stroke="var(--line)"
-                strokeWidth="1"
-                strokeDasharray="6 8"
-              />
-            ))}
-          </svg>
-
-          {/* Center wordmark */}
-          <div className="feat-center">
-            <span className="feat-center-mark">PRESENTLY</span>
-            <span className="feat-center-tag">
-              Know who&rsquo;s here. Know who&rsquo;s ready.
-            </span>
-          </div>
-
-          {/* Cluster groups */}
-          {CLUSTERS.map((cluster) => (
-            <div
-              key={cluster.id}
-              className="feat-cluster"
-              style={{ left: cluster.x, top: cluster.y }}
-            >
-              <button
-                className={`feat-node${active === cluster.id ? " feat-node-active" : ""}${entrance !== "hidden" ? " feat-node-visible" : " feat-node-enter"}`}
-                style={entrance === "entering" ? { transitionDelay: `${(cluster.id - 1) * 80}ms` } : undefined}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActive(active === cluster.id ? null : cluster.id);
-                }}
-                aria-label={`View ${cluster.title} features`}
-              >
-                <span className="feat-badge">{cluster.id}</span>
-                <div className="feat-ico">
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="var(--blue)"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    {CLUSTER_ICONS[cluster.id]}
-                  </svg>
-                </div>
-                <span className="feat-node-title">{cluster.title}</span>
-              </button>
-
-              <div
-                className={`feat-detail${active === cluster.id ? " feat-detail-show" : ""}`}
-              >
-                <p className="feat-detail-desc">{cluster.desc}</p>
-                <div className="feat-sub-grid">
-                  {cluster.features.map((f, i) => (
-                    <div className="feat-sub-card" key={i}>
-                      <div className="feat-sub-ico">
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="var(--blue)"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          {SUB_ICONS[f.icon]}
-                        </svg>
-                      </div>
-                      <div>
-                        <h4>{f.title}</h4>
-                        <p>{f.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+            <CanvasContent
+              active={active}
+              setActive={setActive}
+              entrance={entrance}
+              nodeRefs={nodeRefs}
+            />
+          </TransformComponent>
+        </TransformWrapper>
       </div>
 
       {/* ── Mobile Accordion ── */}

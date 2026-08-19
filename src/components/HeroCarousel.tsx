@@ -61,7 +61,7 @@ function HereNowSlide() {
       <div className="hn-header">
         <span className="hn-title">
           <span className="live-pip" aria-hidden="true" />
-          Here now — 14 students
+          PI Room — 14 students
         </span>
         <span className="hn-clock">{clock}</span>
       </div>

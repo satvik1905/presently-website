@@ -96,7 +96,7 @@ export async function POST(req: Request) {
     return NextResponse.json({
       valid: true,
       promotionCodeId: promoCode.id,
-      discountName: coupon.name || code,
+      discountName: promoCode.code,
       amountOff: coupon.amount_off,
       percentOff: coupon.percent_off,
       spotsLeft,

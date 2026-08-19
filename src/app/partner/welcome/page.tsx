@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 export default function WelcomePage() {
   return (
     <>
-      <Navbar />
+      <Navbar links={[{ label: "Home", href: "/" }]} />
       <main>
         <section className="welcome-hero">
           <div className="wrap">

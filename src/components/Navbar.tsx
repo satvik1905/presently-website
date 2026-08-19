@@ -1,18 +1,26 @@
-export default function Navbar() {
+interface NavLink {
+  label: string;
+  href: string;
+}
+
+export default function Navbar({ links }: { links?: NavLink[] }) {
   return (
     <header>
       <div className="wrap nav">
-        <a className="wordmark" href="#">
+        <a className="wordmark" href="/">
           <img src="/logo.png" alt="Presently" width={32} height={32} style={{ borderRadius: "50%" }} />
           Presently
         </a>
         <div className="nav-right">
-          <nav className="nav-links" aria-label="Main">
-            <a href="#how">How it works</a>
-            <a href="#features">Features</a>
-            <a href="#demo">Demo</a>
-            <a href="/partner">Partner with us</a>
-          </nav>
+          {links && links.length > 0 && (
+            <nav className="nav-links" aria-label="Main">
+              {links.map((link) => (
+                <a key={link.href} href={link.href}>
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+          )}
           <a className="btn btn-primary" href="#demo">
             Contact Us
           </a>

@@ -39,7 +39,7 @@ const PLANS = [
 export default function PartnerPage() {
   return (
     <>
-      <Navbar />
+      <Navbar links={[{ label: "Features", href: "/features" }]} />
       <main>
         {/* Hero */}
         <section className="partner-hero">
@@ -116,6 +116,9 @@ export default function PartnerPage() {
                 </div>
               ))}
             </div>
+            <p className="plan-footnote">
+              No contracts. Cancel anytime. Pilot pricing locked forever.
+            </p>
           </div>
         </section>
 

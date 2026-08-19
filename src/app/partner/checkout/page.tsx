@@ -174,7 +174,7 @@ function CheckoutForm() {
   if (!plan || !planKey) {
     return (
       <>
-        <Navbar />
+        <Navbar links={[{ label: "Home", href: "/" }, { label: "Plans", href: "/partner" }]} />
         <main>
           <section className="partner-hero">
             <div className="wrap">
@@ -194,7 +194,7 @@ function CheckoutForm() {
 
   return (
     <>
-      <Navbar />
+      <Navbar links={[{ label: "Home", href: "/" }, { label: "Plans", href: "/partner" }]} />
       <main>
         <section className="partner-checkout-page">
           <div className="wrap">

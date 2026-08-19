@@ -27,8 +27,8 @@ export default function Faq() {
   return (
     <section className="partner-faq">
       <div className="wrap">
-        <h2>Questions</h2>
         <div className="faq-list">
+          <h2>Questions</h2>
           {ITEMS.map((item, i) => (
             <div key={i} className="faq-item">
               <button

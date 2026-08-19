@@ -20,27 +20,30 @@ function formatClock() {
 }
 
 /* ═══════════════════════════════════════════
-   Slide 1 — "Here now" live board
+   Slide 1 — "Here now" student cards
    ═══════════════════════════════════════════ */
 
-const boardTimers = [
-  { id: "maya", start: 312 },
-  { id: "dev", start: 748 },
-  { id: "jonah", start: 1918 },
-  { id: "sofia", start: 1204 },
-  { id: "arjun", start: 522 },
-  { id: "ella", start: 96 },
+const students = [
+  { id: "maya",  name: "Maya R.",  initial: "M", subject: "Math",           start: 347, limit: 30, checkin: "12:41 PM" },
+  { id: "dev",   name: "Dev P.",   initial: "D", subject: "Reading",        start: 783, limit: 30, checkin: "12:34 PM" },
+  { id: "sofia", name: "Sofia L.", initial: "S", subject: "Math & Reading", start: 1239, limit: 60, checkin: "12:17 PM" },
+  { id: "jonah", name: "Jonah K.", initial: "J", subject: "Math",           start: 1953, limit: 30, checkin: "11:55 AM" },
 ];
 
+function avatarColors(subject: string) {
+  if (subject === "Reading") return { bg: "#DCFCE7", color: "#16A34A" };
+  return { bg: "#DBEAFE", color: "#6366F1" };
+}
+
 function HereNowSlide() {
-  const [timers, setTimers] = useState(() =>
-    boardTimers.map((t) => ({ ...t, s: t.start }))
+  const [elapsed, setElapsed] = useState(() =>
+    students.map((s) => s.start)
   );
   const [clock, setClock] = useState(formatClock);
 
   useEffect(() => {
     const tid = setInterval(() => {
-      setTimers((prev) => prev.map((t) => ({ ...t, s: t.s + 1 })));
+      setElapsed((prev) => prev.map((t) => t + 1));
     }, 1000);
     const cid = setInterval(() => setClock(formatClock()), 15000);
     return () => {
@@ -49,90 +52,50 @@ function HereNowSlide() {
     };
   }, []);
 
-  const t = (id: string) => fmt(timers.find((x) => x.id === id)!.s);
-
   return (
     <div
-      className="board carousel-board"
+      className="hn-slide"
       role="img"
       aria-label="Live dashboard showing students currently checked in"
     >
-      <div className="board-top">
-        <span className="title">
+      <div className="hn-header">
+        <span className="hn-title">
           <span className="live-pip" aria-hidden="true" />
-          Here now
+          Here now — 14 students
         </span>
-        <span className="board-count">14 students</span>
-        <span className="clock">{clock}</span>
+        <span className="hn-clock">{clock}</span>
       </div>
-      <div className="rooms">
-        <div className="room">
-          <div className="room-h">
-            <span>EL Room</span>
-            <span className="n">7</span>
-          </div>
-          <div className="kid ok">
-            <span>
-              <span className="name">Maya R.</span>
-              <span className="sub">Math</span>
-            </span>
-            <span className="t">{t("maya")}</span>
-          </div>
-          <div className="kid ok">
-            <span>
-              <span className="name">Dev P.</span>
-              <span className="sub">Reading</span>
-            </span>
-            <span className="t">{t("dev")}</span>
-          </div>
-          <div className="kid warm">
-            <span>
-              <span className="name">Jonah K.</span>
-              <span className="sub">Over limit · 30 min</span>
-            </span>
-            <span className="t">{t("jonah")}</span>
-          </div>
-        </div>
-        <div className="room">
-          <div className="room-h">
-            <span>Main Room</span>
-            <span className="n">7</span>
-          </div>
-          <div className="kid ok">
-            <span>
-              <span className="name">Sofia L.</span>
-              <span className="sub">Math &amp; Reading</span>
-            </span>
-            <span className="t">{t("sofia")}</span>
-          </div>
-          <div className="kid ok">
-            <span>
-              <span className="name">Arjun M.</span>
-              <span className="sub">Math</span>
-            </span>
-            <span className="t">{t("arjun")}</span>
-          </div>
-          <div className="kid ok">
-            <span>
-              <span className="name">Ella T.</span>
-              <span className="sub">Reading</span>
-            </span>
-            <span className="t">{t("ella")}</span>
-          </div>
-        </div>
-      </div>
-      <div className="board-foot">
-        <span className="msg">
-          <span className="ic" aria-hidden="true">
-            ✓
-          </span>
-          Maya&rsquo;s mom was texted at check-in
-        </span>
-        <span
-          style={{ fontSize: "12.5px", fontVariantNumeric: "tabular-nums" }}
-        >
-          1 over limit
-        </span>
+      <div className="hn-cards">
+        {students.map((s, i) => {
+          const over = elapsed[i] >= s.limit * 60;
+          const av = avatarColors(s.subject);
+          return (
+            <div
+              key={s.id}
+              className={`hn-card${over ? " hn-card-over" : ""}`}
+            >
+              <span
+                className="hn-avatar"
+                style={{ background: av.bg, color: av.color }}
+                aria-hidden="true"
+              >
+                {s.initial}
+              </span>
+              <div className="hn-card-info">
+                <span className="hn-card-name">{s.name}</span>
+                <span className="hn-card-sub">
+                  {s.subject} · {s.checkin}
+                </span>
+              </div>
+              <div className="hn-card-time">
+                <span className={`hn-elapsed${over ? " hn-elapsed-over" : ""}`}>
+                  {fmt(elapsed[i])}
+                </span>
+                <span className="hn-limit">{s.limit} m</span>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

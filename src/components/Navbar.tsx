@@ -6,12 +6,13 @@ export default function Navbar() {
           <img src="/logo.png" alt="Presently" width={32} height={32} style={{ borderRadius: "50%" }} />
           Presently
         </a>
-        <nav className="nav-links" aria-label="Main">
-          <a href="#how">How it works</a>
-          <a href="#features">Features</a>
-          <a href="#demo">Demo</a>
-        </nav>
-        <div className="nav-cta">
+        <div className="nav-right">
+          <nav className="nav-links" aria-label="Main">
+            <a href="#how">How it works</a>
+            <a href="#features">Features</a>
+            <a href="#demo">Demo</a>
+            <a href="/partner">Partner with us</a>
+          </nav>
           <a className="btn btn-primary" href="#demo">
             Contact Us
           </a>

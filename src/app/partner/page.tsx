@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Faq from "@/components/Faq";
 
 const PLANS = [
   {
@@ -118,35 +119,7 @@ export default function PartnerPage() {
           </div>
         </section>
 
-        {/* FAQ */}
-        <section className="partner-faq">
-          <div className="wrap">
-            <h2>Questions</h2>
-            <div className="faq-list">
-              <div className="faq-item">
-                <h3>Can I cancel anytime?</h3>
-                <p>
-                  Yes. Cancel from your billing portal whenever you want. No
-                  contracts, no cancellation fees.
-                </p>
-              </div>
-              <div className="faq-item">
-                <h3>What happens after the pilot?</h3>
-                <p>
-                  Your pilot pricing stays locked. When we launch publicly, new
-                  centers will pay more. You keep your rate.
-                </p>
-              </div>
-              <div className="faq-item">
-                <h3>Do I need to install anything?</h3>
-                <p>
-                  No. Presently is web-based and works on the iPad you already
-                  have at your front desk. No app downloads, no new hardware.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+        <Faq />
       </main>
       <Footer />
     </>

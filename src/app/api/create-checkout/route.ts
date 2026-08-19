@@ -39,7 +39,13 @@ export async function POST(req: Request) {
       err instanceof Stripe.errors.StripeError
         ? err.message
         : "Failed to create checkout session. Please try again.";
+    const promoInvalid =
+      err instanceof Stripe.errors.StripeError &&
+      /coupon|promot|discount|does not apply/i.test(err.message);
     console.error("create-checkout error:", err);
-    return NextResponse.json({ error: message }, { status: 500 });
+    return NextResponse.json(
+      { error: message, promoInvalid },
+      { status: 500 }
+    );
   }
 }

@@ -56,18 +56,37 @@ export async function POST(req: Request) {
       });
     }
 
-    // Check if coupon is restricted to specific products
-    if (coupon.applies_to && coupon.applies_to.products.length > 0) {
-      const price = await stripe.prices.retrieve(priceId);
-      const productId =
-        typeof price.product === "string" ? price.product : price.product.id;
+    // Validate by attempting a real checkout session with this promo code.
+    // This is the only reliable way to check all of Stripe's restriction
+    // rules (product restrictions, currency, first-time-transaction, etc).
+    const baseUrl =
+      process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
-      if (!coupon.applies_to.products.includes(productId)) {
-        return NextResponse.json({
-          valid: false,
-          error: "This code is only valid for the Standard plan.",
-        });
-      }
+    try {
+      const testSession = await stripe.checkout.sessions.create({
+        mode: "subscription",
+        line_items: [{ price: priceId, quantity: 1 }],
+        discounts: [{ promotion_code: promoCode.id }],
+        customer_email: "validation-test@presently.internal",
+        success_url: `${baseUrl}/partner`,
+        cancel_url: `${baseUrl}/partner`,
+      });
+
+      // It worked — expire the test session immediately
+      await stripe.checkout.sessions.expire(testSession.id);
+    } catch (err) {
+      // Stripe rejected the promo + plan combination
+      const msg =
+        err instanceof Stripe.errors.StripeError
+          ? err.message
+          : "This code doesn't apply to the selected plan.";
+
+      return NextResponse.json({
+        valid: false,
+        error: /coupon|promot|discount|does not apply/i.test(msg)
+          ? "This code doesn't apply to the selected plan."
+          : msg,
+      });
     }
 
     const spotsLeft = promoCode.max_redemptions

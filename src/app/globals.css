@@ -76,7 +76,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 15px;
   font-weight: 500;
   padding: 9px 18px;
-  border-radius: 999px;
+  border-radius: 10px;
   border: 1px solid transparent;
   cursor: pointer;
   transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
@@ -905,7 +905,7 @@ blockquote {
   padding: 14px;
   font-size: 15px;
   font-weight: 600;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius);
   margin-top: 4px;
 }
 .cta-submit:disabled {
@@ -957,24 +957,24 @@ footer {
 
 /* ── Partner Page ── */
 .partner-hero {
-  padding: 120px 0 48px;
+  padding: 100px 0 24px;
+  text-align: center;
 }
-.partner-hero h1 {
+.partner-hero h2 {
   font-weight: 600;
-  font-size: clamp(32px, 3.8vw, 48px);
-  line-height: 1.1;
-  letter-spacing: -0.025em;
-  margin: 18px 0 16px;
-  max-width: 20ch;
+  font-size: clamp(26px, 3vw, 36px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 auto 8px;
 }
-.partner-hero .lede {
-  font-size: 17px;
+.partner-hero .sub {
+  font-size: 16px;
   color: var(--muted);
-  max-width: 52ch;
+  margin: 0 auto;
 }
 
 /* Plan Picker */
-.partner-plans { padding: 48px 0 88px; }
+.partner-plans { padding: 16px 0 64px; }
 .plan-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -987,7 +987,7 @@ footer {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  padding: 32px 28px;
+  padding: 24px 24px;
   display: flex;
   flex-direction: column;
   transition: border-color 0.15s ease;
@@ -996,11 +996,6 @@ footer {
 .plan-card-pro {
   border-top: 2px solid var(--blue);
 }
-.plan-card-selected {
-  border-color: var(--blue);
-  box-shadow: 0 0 0 1px var(--blue);
-}
-.plan-card-selected:hover { border-color: var(--blue); }
 .plan-badge {
   position: absolute;
   top: 14px;
@@ -1021,24 +1016,24 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 .plan-card h3 {
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 600;
   letter-spacing: -0.01em;
   margin-bottom: 4px;
 }
 .plan-desc {
-  font-size: 14.5px;
+  font-size: 14px;
   color: var(--muted);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 .plan-price {
   display: flex;
   align-items: baseline;
   gap: 6px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 .plan-price-old {
   font-size: 20px;
@@ -1046,7 +1041,7 @@ footer {
   text-decoration: line-through;
 }
 .plan-price-new {
-  font-size: 38px;
+  font-size: 34px;
   font-weight: 700;
   letter-spacing: -0.025em;
 }
@@ -1057,15 +1052,16 @@ footer {
 .plan-select-btn {
   width: 100%;
   justify-content: center;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
+  text-decoration: none;
 }
 .plan-features {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   border-top: 1px solid var(--line);
-  padding-top: 20px;
+  padding-top: 16px;
 }
 .plan-features li {
   display: flex;
@@ -1077,13 +1073,13 @@ footer {
 .plan-features li svg { flex-shrink: 0; }
 
 /* Checkout */
-.partner-checkout { padding: 0 0 88px; }
+.partner-checkout-page { padding: 120px 0 88px; }
 .checkout-container {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-xl);
   padding: 36px 32px;
-  max-width: 640px;
+  max-width: 560px;
   margin: 0 auto;
 }
 .checkout-summary {
@@ -1121,6 +1117,10 @@ footer {
   white-space: nowrap;
   min-width: 72px;
   justify-content: center;
+}
+.promo-apply-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 .promo-applied {
   background: var(--green-tint);

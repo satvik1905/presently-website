@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
@@ -31,6 +31,14 @@ interface PromoResult {
 }
 
 export default function CheckoutPage() {
+  return (
+    <Suspense>
+      <CheckoutForm />
+    </Suspense>
+  );
+}
+
+function CheckoutForm() {
   const searchParams = useSearchParams();
   const planParam = searchParams.get("plan") as PlanKey | null;
   const planKey = planParam && planParam in PLANS ? planParam : null;

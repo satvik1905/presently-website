@@ -166,7 +166,7 @@ const MODULES: Module[] = [
 ];
 
 const PATH = [
-  { x: 2000, y: 1600, scale: 0.35, label: "OVERVIEW (0 / 6)" },
+  { x: 2000, y: 1700, scale: 0.35, label: "OVERVIEW (0 / 6)" },
   { x: 2000, y: 850, scale: 1.15, label: "1. SMART CHECK-IN / OUT" },
   { x: 1350, y: 1200, scale: 1.15, label: "2. PARENT COMMUNICATION" },
   { x: 2650, y: 1200, scale: 1.15, label: "3. CENTER MANAGEMENT" },
@@ -222,7 +222,7 @@ export default function FeaturesPage() {
   }, [step, zoomTo]);
 
   const resetOverview = useCallback(() => {
-    zoomTo(2000, 1600, 0.35, 0);
+    zoomTo(2000, 1700, 0.35, 0);
   }, [zoomTo]);
 
   useEffect(() => {

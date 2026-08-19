@@ -1,4 +1,4 @@
-import LiveBoard from "./LiveBoard";
+import HeroCarousel from "./HeroCarousel";
 
 export default function Hero() {
   return (
@@ -27,7 +27,7 @@ export default function Hero() {
           </p>
         </div>
 
-        <LiveBoard />
+        <HeroCarousel />
       </div>
     </section>
   );

@@ -1,6 +1,12 @@
 "use client";
 
-import { useState, useEffect, useCallback, Fragment, type ComponentType } from "react";
+import {
+  useState,
+  useEffect,
+  useCallback,
+  Fragment,
+  type ComponentType,
+} from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import {
@@ -75,98 +81,350 @@ const MODULES: Module[] = [
     num: 1,
     title: "SMART CHECK-IN / OUT",
     icon: IconScan,
-    cx: 2000, cy: 850, left: 1825, top: 675, w: 350,
-    border: "#60A5FA", badge: "#60A5FA", titleColor: "#1E3A8A",
+    cx: 2000,
+    cy: 850,
+    left: 1825,
+    top: 675,
+    w: 350,
+    border: "#60A5FA",
+    badge: "#60A5FA",
+    titleColor: "#1E3A8A",
     shadow: "0 15px 40px rgba(96,165,250,0.2)",
-    subBg: "#60A5FA", subBorder: "#3B82F6",
-    features: ["Student QR Scan In/Out", "Automatic Timers (30 / 60 min)", "Time to Dismiss alerts", "Live Dashboard"],
+    subBg: "#60A5FA",
+    subBorder: "#3B82F6",
+    features: [
+      "Student QR Scan In/Out",
+      "Automatic Timers (30 / 60 min)",
+      "Time to Dismiss alerts",
+      "Live Dashboard",
+    ],
     subs: [
-      { icon: IconBellRinging, title: "Automatic Parent Alerts", desc: "Instant arrival/leave notifications", cx: 1620, cy: 680, left: 1530, top: 590, w: 180 },
-      { icon: IconClock, title: "Automatic Timers", desc: "30 min (1 subj) / 60 min (2 subj)", cx: 2380, cy: 680, left: 2290, top: 590, w: 180 },
-      { icon: IconAlertCircle, title: "Time to Dismiss", desc: "Color-coded alerts when up", cx: 2520, cy: 860, left: 2435, top: 775, w: 170 },
-      { icon: IconPencil, title: "Manual Checkout", desc: "Forgot to scan backup", cx: 2360, cy: 1020, left: 2275, top: 935, w: 170 },
+      {
+        icon: IconBellRinging,
+        title: "Automatic Parent Alerts",
+        desc: "Instant arrival/leave notifications",
+        cx: 1620,
+        cy: 680,
+        left: 1530,
+        top: 590,
+        w: 180,
+      },
+      {
+        icon: IconClock,
+        title: "Automatic Timers",
+        desc: "30 min (1 subj) / 60 min (2 subj)",
+        cx: 2380,
+        cy: 680,
+        left: 2290,
+        top: 590,
+        w: 180,
+      },
+      {
+        icon: IconAlertCircle,
+        title: "Time to Dismiss",
+        desc: "Color-coded alerts when up",
+        cx: 2520,
+        cy: 860,
+        left: 2435,
+        top: 775,
+        w: 170,
+      },
+      {
+        icon: IconPencil,
+        title: "Manual Checkout",
+        desc: "Forgot to scan backup",
+        cx: 2360,
+        cy: 1020,
+        left: 2275,
+        top: 935,
+        w: 170,
+      },
     ],
   },
   {
     num: 2,
     title: "PARENT COMMUNICATION",
     icon: IconMessages,
-    cx: 1350, cy: 1200, left: 1175, top: 1025, w: 350,
-    border: "#3B82F6", badge: "#3B82F6", titleColor: "#1E3A8A",
+    cx: 1350,
+    cy: 1200,
+    left: 1175,
+    top: 1025,
+    w: 350,
+    border: "#3B82F6",
+    badge: "#3B82F6",
+    titleColor: "#1E3A8A",
     shadow: "0 15px 40px rgba(59,130,246,0.18)",
-    subBg: "#3B82F6", subBorder: "#2563EB",
-    features: ["Two-Way Messaging", "Broadcast Messages", "Scheduled Broadcasts", "Quick Parent Responses"],
+    subBg: "#3B82F6",
+    subBorder: "#2563EB",
+    features: [
+      "Two-Way Messaging",
+      "Broadcast Messages",
+      "Scheduled Broadcasts",
+      "Quick Parent Responses",
+    ],
     subs: [
-      { icon: IconMessageCircle, title: "Two-Way Messaging", desc: "Direct parent-instructor chat", cx: 1000, cy: 1020, left: 915, top: 935, w: 170 },
-      { icon: IconSpeakerphone, title: "Broadcast Messages", desc: "Send to one, many, or all", cx: 940, cy: 1200, left: 855, top: 1115, w: 170 },
-      { icon: IconCalendarEvent, title: "Scheduled Broadcasts", desc: "Plan announcements ahead", cx: 1000, cy: 1380, left: 915, top: 1295, w: 170 },
+      {
+        icon: IconMessageCircle,
+        title: "Two-Way Messaging",
+        desc: "Direct parent-instructor chat",
+        cx: 1000,
+        cy: 1020,
+        left: 915,
+        top: 935,
+        w: 170,
+      },
+      {
+        icon: IconSpeakerphone,
+        title: "Broadcast Messages",
+        desc: "Send to one, many, or all",
+        cx: 940,
+        cy: 1200,
+        left: 855,
+        top: 1115,
+        w: 170,
+      },
+      {
+        icon: IconCalendarEvent,
+        title: "Scheduled Broadcasts",
+        desc: "Plan announcements ahead",
+        cx: 1000,
+        cy: 1380,
+        left: 915,
+        top: 1295,
+        w: 170,
+      },
     ],
   },
   {
     num: 3,
     title: "CENTER MANAGEMENT",
     icon: IconBuilding,
-    cx: 2650, cy: 1200, left: 2475, top: 1025, w: 350,
-    border: "#2563EB", badge: "#2563EB", titleColor: "#1E3A8A",
+    cx: 2650,
+    cy: 1200,
+    left: 2475,
+    top: 1025,
+    w: 350,
+    border: "#2563EB",
+    badge: "#2563EB",
+    titleColor: "#1E3A8A",
     shadow: "0 15px 40px rgba(37,99,235,0.16)",
-    subBg: "#2563EB", subBorder: "#1D4ED8",
-    features: ["Student Profiles", "KSIS Mass Import", "Multiple Centers Support", "Staff Access Levels"],
+    subBg: "#2563EB",
+    subBorder: "#1D4ED8",
+    features: [
+      "Student Profiles",
+      "KSIS Mass Import",
+      "Multiple Centers Support",
+      "Staff Access Levels",
+    ],
     subs: [
-      { icon: IconUser, title: "Student Profiles", desc: "Time limits, subjects, rooms", cx: 3020, cy: 1020, left: 2935, top: 935, w: 170 },
-      { icon: IconBolt, title: "KSIS Mass Import", desc: "1-time roster sync", cx: 3080, cy: 1180, left: 2995, top: 1095, w: 170 },
-      { icon: IconBuildings, title: "Multiple Centers", desc: "Manage from 1 account", cx: 3040, cy: 1340, left: 2955, top: 1255, w: 170 },
-      { icon: IconPower, title: "Auto Deactivate", desc: "Inactive 60 days pruned", cx: 2950, cy: 1480, left: 2865, top: 1395, w: 170 },
+      {
+        icon: IconUser,
+        title: "Student Profiles",
+        desc: "Time limits, subjects, rooms",
+        cx: 3020,
+        cy: 1020,
+        left: 2935,
+        top: 935,
+        w: 170,
+      },
+      {
+        icon: IconBolt,
+        title: "KSIS Mass Import",
+        desc: "1-time roster sync",
+        cx: 3080,
+        cy: 1180,
+        left: 2995,
+        top: 1095,
+        w: 170,
+      },
+      {
+        icon: IconBuildings,
+        title: "Multiple Centers",
+        desc: "Manage from 1 account",
+        cx: 3040,
+        cy: 1340,
+        left: 2955,
+        top: 1255,
+        w: 170,
+      },
+      {
+        icon: IconPower,
+        title: "Auto Deactivate",
+        desc: "Inactive 60 days pruned",
+        cx: 2950,
+        cy: 1480,
+        left: 2865,
+        top: 1395,
+        w: 170,
+      },
     ],
   },
   {
     num: 4,
     title: "ATTENDANCE & REPORTS",
     icon: IconChartBar,
-    cx: 1350, cy: 1850, left: 1175, top: 1675, w: 350,
-    border: "#1D4ED8", badge: "#1D4ED8", titleColor: "#1E3A8A",
+    cx: 1350,
+    cy: 1850,
+    left: 1175,
+    top: 1675,
+    w: 350,
+    border: "#1D4ED8",
+    badge: "#1D4ED8",
+    titleColor: "#1E3A8A",
     shadow: "0 15px 40px rgba(29,78,216,0.16)",
-    subBg: "#1D4ED8", subBorder: "#1E40AF",
-    features: ["Attendance History", "Absence Tracking", "Custom Reports", "Export & Filter Data"],
+    subBg: "#1D4ED8",
+    subBorder: "#1E40AF",
+    features: [
+      "Attendance History",
+      "Absence Tracking",
+      "Custom Reports",
+      "Export & Filter Data",
+    ],
     subs: [
-      { icon: IconListCheck, title: "Attendance History", desc: "Detailed fingertip records", cx: 980, cy: 1700, left: 895, top: 1615, w: 170 },
-      { icon: IconReport, title: "Absence Reports", desc: "Track missing days", cx: 940, cy: 1880, left: 855, top: 1795, w: 170 },
-      { icon: IconFilter, title: "Custom Reports", desc: "Filter date, room, subject", cx: 980, cy: 2060, left: 895, top: 1975, w: 170 },
+      {
+        icon: IconListCheck,
+        title: "Attendance History",
+        desc: "Detailed fingertip records",
+        cx: 980,
+        cy: 1700,
+        left: 895,
+        top: 1615,
+        w: 170,
+      },
+      {
+        icon: IconReport,
+        title: "Absence Reports",
+        desc: "Track missing days",
+        cx: 940,
+        cy: 1880,
+        left: 855,
+        top: 1795,
+        w: 170,
+      },
+      {
+        icon: IconFilter,
+        title: "Custom Reports",
+        desc: "Filter date, room, subject",
+        cx: 980,
+        cy: 2060,
+        left: 895,
+        top: 1975,
+        w: 170,
+      },
     ],
   },
   {
     num: 5,
     title: "KUMON-SPECIFIC TOOLS",
     icon: IconSchool,
-    cx: 2000, cy: 2150, left: 1825, top: 1975, w: 350,
-    border: "#1E40AF", badge: "#1E40AF", titleColor: "#1E3A8A",
+    cx: 2000,
+    cy: 2150,
+    left: 1825,
+    top: 1975,
+    w: 350,
+    border: "#1E40AF",
+    badge: "#1E40AF",
+    titleColor: "#1E3A8A",
     shadow: "0 15px 40px rgba(30,64,175,0.16)",
-    subBg: "#1E40AF", subBorder: "#1E3A8A",
-    features: ["Subject-Based Timing", "EL / PI / MAIN Areas", "Kumon Connect Friendly", "Tablet & Paper Support"],
+    subBg: "#1E40AF",
+    subBorder: "#1E3A8A",
+    features: [
+      "Subject-Based Timing",
+      "EL / PI / MAIN Areas",
+      "Kumon Connect Friendly",
+      "Tablet & Paper Support",
+    ],
     subs: [
-      { icon: IconTimer, title: "Subject Timing", desc: "30 min (1) / 60 min (2)", cx: 1720, cy: 2420, left: 1635, top: 2335, w: 170 },
-      { icon: IconLayoutDashboard, title: "EL / PI / MAIN", desc: "Organize your center zones", cx: 2000, cy: 2480, left: 1915, top: 2395, w: 170 },
-      { icon: IconDeviceTablet, title: "Kumon Connect", desc: "Tablet & paper friendly", cx: 2280, cy: 2420, left: 2195, top: 2335, w: 170 },
+      {
+        icon: IconTimer,
+        title: "Subject Timing",
+        desc: "30 min (1) / 60 min (2)",
+        cx: 1720,
+        cy: 2420,
+        left: 1635,
+        top: 2335,
+        w: 170,
+      },
+      {
+        icon: IconLayoutDashboard,
+        title: "EL / PI / MAIN",
+        desc: "Organize your center zones",
+        cx: 2000,
+        cy: 2480,
+        left: 1915,
+        top: 2395,
+        w: 170,
+      },
+      {
+        icon: IconDeviceTablet,
+        title: "Kumon Connect",
+        desc: "Tablet & paper friendly",
+        cx: 2280,
+        cy: 2420,
+        left: 2195,
+        top: 2335,
+        w: 170,
+      },
     ],
   },
   {
     num: 6,
     title: "SAFETY & SECURITY",
     icon: IconShieldCheck,
-    cx: 2650, cy: 1850, left: 2475, top: 1675, w: 350,
-    border: "#1E3A8A", badge: "#1E3A8A", titleColor: "#1E3A8A",
+    cx: 2650,
+    cy: 1850,
+    left: 2475,
+    top: 1675,
+    w: 350,
+    border: "#1E3A8A",
+    badge: "#1E3A8A",
+    titleColor: "#1E3A8A",
     shadow: "0 15px 40px rgba(30,58,138,0.16)",
-    subBg: "#1E3A8A", subBorder: "#172554",
-    features: ["Secure & Compliant", "PII Protection", "2-Year Record Retention", "Trusted & Reliable"],
+    subBg: "#1E3A8A",
+    subBorder: "#172554",
+    features: [
+      "Secure & Compliant",
+      "PII Protection",
+      "7-Year Record Retention",
+      "Trusted & Reliable",
+    ],
     subs: [
-      { icon: IconLock, title: "Secure & Compliant", desc: "Industry-standard encryption", cx: 3020, cy: 1700, left: 2935, top: 1615, w: 170 },
-      { icon: IconShieldLock, title: "PII Protection", desc: "Personal info separated", cx: 3060, cy: 1860, left: 2975, top: 1775, w: 170 },
-      { icon: IconArchive, title: "2-Year Retention", desc: "Meets Kumon legal standards", cx: 3020, cy: 2020, left: 2935, top: 1935, w: 170 },
+      {
+        icon: IconLock,
+        title: "Secure & Compliant",
+        desc: "Industry-standard encryption",
+        cx: 3020,
+        cy: 1700,
+        left: 2935,
+        top: 1615,
+        w: 170,
+      },
+      {
+        icon: IconShieldLock,
+        title: "PII Protection",
+        desc: "Personal info separated",
+        cx: 3060,
+        cy: 1860,
+        left: 2975,
+        top: 1775,
+        w: 170,
+      },
+      {
+        icon: IconArchive,
+        title: "7-Year Retention",
+        desc: "Meets Kumon legal standards",
+        cx: 3020,
+        cy: 2020,
+        left: 2935,
+        top: 1935,
+        w: 170,
+      },
     ],
   },
 ];
 
 const PATH = [
-  { x: 2000, y: 1700, scale: 0.35, label: "OVERVIEW (0 / 6)" },
+  { x: 2000, y: 1400, scale: 0.45, label: "OVERVIEW (0 / 6)" },
   { x: 2000, y: 850, scale: 1.15, label: "1. SMART CHECK-IN / OUT" },
   { x: 1350, y: 1200, scale: 1.15, label: "2. PARENT COMMUNICATION" },
   { x: 2650, y: 1200, scale: 1.15, label: "3. CENTER MANAGEMENT" },
@@ -177,16 +435,20 @@ const PATH = [
 
 // Compute all connector lines from data
 const CONNECTORS: [number, number, number, number][] = [
-  ...MODULES.map((m) => [HUB.cx, HUB.cy, m.cx, m.cy] as [number, number, number, number]),
+  ...MODULES.map(
+    (m) => [HUB.cx, HUB.cy, m.cx, m.cy] as [number, number, number, number],
+  ),
   ...MODULES.flatMap((m) =>
-    m.subs.map((s) => [m.cx, m.cy, s.cx, s.cy] as [number, number, number, number])
+    m.subs.map(
+      (s) => [m.cx, m.cy, s.cx, s.cy] as [number, number, number, number],
+    ),
   ),
 ];
 
 /* ── Component ── */
 
 export default function FeaturesPage() {
-  const [zoom, setZoom] = useState({ x: 2000, y: 1500, scale: 0.42 });
+  const [zoom, setZoom] = useState({ x: 2000, y: 1400, scale: 0.42 });
   const [step, setStep] = useState(0);
   const [vp, setVp] = useState({ w: 1440, h: 832 });
   const [ready, setReady] = useState(false);
@@ -206,7 +468,7 @@ export default function FeaturesPage() {
       setZoom({ x, y, scale });
       if (s !== undefined) setStep(s);
     },
-    []
+    [],
   );
 
   const nextStep = useCallback(() => {
@@ -222,7 +484,8 @@ export default function FeaturesPage() {
   }, [step, zoomTo]);
 
   const resetOverview = useCallback(() => {
-    zoomTo(2000, 1700, 0.35, 0);
+    const t = PATH[0];
+    zoomTo(t.x, t.y, t.scale, 0);
   }, [zoomTo]);
 
   useEffect(() => {
@@ -324,10 +587,7 @@ export default function FeaturesPage() {
                 }}
                 onClick={() => zoomTo(m.cx, m.cy, 1.15, m.num)}
               >
-                <span
-                  className="prezi-badge"
-                  style={{ background: m.badge }}
-                >
+                <span className="prezi-badge" style={{ background: m.badge }}>
                   {m.num}
                 </span>
                 <m.icon size={30} stroke={1.5} color={m.border} />
@@ -434,9 +694,7 @@ export default function FeaturesPage() {
                 <div className="fmobile-item" key={i}>
                   <button
                     className="fmobile-trigger"
-                    onClick={() =>
-                      setMobileOpen(mobileOpen === i ? null : i)
-                    }
+                    onClick={() => setMobileOpen(mobileOpen === i ? null : i)}
                     aria-expanded={mobileOpen === i}
                   >
                     <div className="fmobile-left">
@@ -469,7 +727,12 @@ export default function FeaturesPage() {
                     <div className="fmobile-inner">
                       {m.subs.map((s, si) => (
                         <div className="fmobile-sub" key={si}>
-                          <s.icon size={20} stroke={1.5} color={m.badge} style={{ flexShrink: 0 }} />
+                          <s.icon
+                            size={20}
+                            stroke={1.5}
+                            color={m.badge}
+                            style={{ flexShrink: 0 }}
+                          />
                           <div>
                             <h4>{s.title}</h4>
                             <p>{s.desc}</p>

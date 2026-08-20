@@ -148,6 +148,7 @@ function CheckoutForm() {
           customerEmail: `${form.emailUser.trim()}@ikumon.com`,
           centerName: form.centerName.trim(),
           customerName: `${form.firstName.trim()} ${form.lastName.trim()}`,
+          location: form.location.trim(),
         }),
       });
       const data = await res.json();

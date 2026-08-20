@@ -38,7 +38,7 @@ export default function CtaForm() {
       <div className="cta-field">
         <div className="cta-form-row">
           <div>
-            <label className="cta-label">Instructor&rsquo;s first name</label>
+            <label className="cta-label">Instructor&rsquo;s first name <span style={{ color: "#DC2626" }}>*</span></label>
             <input
               type="text"
               placeholder="Maya"
@@ -49,7 +49,7 @@ export default function CtaForm() {
             />
           </div>
           <div>
-            <label className="cta-label">Instructor&rsquo;s last name</label>
+            <label className="cta-label">Instructor&rsquo;s last name <span style={{ color: "#DC2626" }}>*</span></label>
             <input
               type="text"
               placeholder="Rodriguez"
@@ -63,7 +63,7 @@ export default function CtaForm() {
       </div>
 
       <div className="cta-field">
-        <label className="cta-label">Work email</label>
+        <label className="cta-label">Work email <span style={{ color: "#DC2626" }}>*</span></label>
         <input
           type="email"
           placeholder="maya@kumoncarmel.com"
@@ -75,7 +75,7 @@ export default function CtaForm() {
       </div>
 
       <div className="cta-field">
-        <label className="cta-label">Center name</label>
+        <label className="cta-label">Center name <span style={{ color: "#DC2626" }}>*</span></label>
         <input
           type="text"
           placeholder="Kumon Carmel"
@@ -87,16 +87,14 @@ export default function CtaForm() {
       </div>
 
       <div className="cta-field">
-        <label className="cta-label">How many centers do you operate?</label>
+        <label className="cta-label">How many centers do you operate? <span style={{ color: "#DC2626" }}>*</span></label>
         <select
           className="cta-input cta-select"
           value={form.students}
           onChange={(e) => update("students", e.target.value)}
         >
           <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4+</option>
+          <option>2+</option>
         </select>
       </div>
 

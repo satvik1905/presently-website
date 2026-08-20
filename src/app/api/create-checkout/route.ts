@@ -7,7 +7,7 @@ function getStripe() {
 
 export async function POST(req: Request) {
   try {
-    const { priceId, promotionCodeId, customerEmail, centerName, customerName } =
+    const { priceId, promotionCodeId, customerEmail, centerName, customerName, location } =
       await req.json();
 
     if (!priceId || !customerEmail || !centerName || !customerName) {
@@ -23,13 +23,15 @@ export async function POST(req: Request) {
     const stripe = getStripe();
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
-      payment_method_types: ["card"],
       line_items: [{ price: priceId, quantity: 1 }],
       ...(promotionCodeId
         ? { discounts: [{ promotion_code: promotionCodeId }] }
         : { allow_promotion_codes: true }),
       customer_email: customerEmail,
-      metadata: { centerName, customerName },
+      metadata: { centerName, customerName, location },
+      subscription_data: {
+        metadata: { centerName, customerName, location },
+      },
       success_url: `${baseUrl}/partner/welcome?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${baseUrl}/partner`,
     });

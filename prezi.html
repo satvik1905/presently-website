@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presently for Kumon — Prezi Canvas Tour (Light)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #f8fafc;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    /* Virtual Infinite World */
+    #viewport {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+      cursor: grab;
+    }
+    #viewport:active {
+      cursor: grabbing;
+    }
+
+    #world {
+      width: 4000px;
+      height: 3000px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-origin: 0 0;
+      transition: transform 1.2s cubic-bezier(0.25, 1, 0.3, 1);
+      background-color: #f8fafc;
+      background-image: 
+        radial-gradient(rgba(148, 163, 184, 0.35) 1.5px, transparent 1.5px),
+        radial-gradient(rgba(6, 182, 212, 0.15) 1px, transparent 1px);
+      background-size: 36px 36px, 108px 108px;
+    }
+
+    /* Nodes & Bubbles */
+    .prezi-node {
+      position: absolute;
+      border-radius: 9999px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .prezi-node:hover {
+      filter: brightness(1.03);
+      transform: scale(1.025);
+    }
+
+    .sub-node {
+      position: absolute;
+      border-radius: 9999px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.3s ease;
+    }
+    .sub-node:hover {
+      transform: scale(1.08);
+      filter: brightness(1.05);
+    }
+
+    /* SVG Connectors */
+    svg.connections {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4000px;
+      height: 3000px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .connector-line {
+      stroke: #cbd5e1;
+      stroke-dasharray: 6 6;
+      stroke-width: 2.5;
+    }
+  </style>
+</head>
+<body class="text-slate-900 selection:bg-cyan-500 selection:text-white">
+
+  <!-- HUD Overlay Controls -->
+  <div class="fixed top-6 left-8 z-50 flex items-center gap-4 pointer-events-auto bg-white/90 backdrop-blur-md px-5 py-3 rounded-2xl border border-slate-200/80 shadow-lg">
+    <div class="w-8 h-8 rounded-xl bg-cyan-600 flex items-center justify-center font-black text-white text-sm shadow-sm shadow-cyan-500/30">P</div>
+    <div>
+      <h1 class="text-sm font-extrabold tracking-wide text-slate-900">PRESENTLY FOR KUMON</h1>
+      <p class="text-[11px] text-slate-500 font-medium">Interactive Spatial Tour</p>
+    </div>
+  </div>
+
+  <!-- Step Tracker HUD -->
+  <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 bg-white/95 backdrop-blur-md px-6 py-3 rounded-full border border-slate-200 shadow-xl">
+    <button onclick="prevStep()" class="p-2 rounded-full hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+    
+    <span id="step-counter" class="text-xs font-mono font-bold text-cyan-700 px-3 tracking-wider">OVERVIEW (0 / 6)</span>
+
+    <button onclick="nextStep()" class="p-2 rounded-full hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+    </button>
+
+    <div class="h-4 w-[1px] bg-slate-200 mx-1"></div>
+
+    <button onclick="zoomToTarget(2000, 1500, 0.42, 0)" class="text-xs font-bold text-slate-600 hover:text-cyan-700 px-2 py-1 transition">
+      Reset Overview
+    </button>
+  </div>
+
+  <!-- Interactive Viewport Canvas -->
+  <div id="viewport">
+    <div id="world">
+      
+      <!-- SVG Connecting Wires -->
+      <svg class="connections">
+        <!-- Main Hub to 6 Main Modules -->
+        <line x1="2000" y1="1500" x2="2000" y2="850" class="connector-line" />
+        <line x1="2000" y1="1500" x2="1350" y2="1200" class="connector-line" />
+        <line x1="2000" y1="1500" x2="2650" y2="1200" class="connector-line" />
+        <line x1="2000" y1="1500" x2="1350" y2="1850" class="connector-line" />
+        <line x1="2000" y1="1500" x2="2000" y2="2150" class="connector-line" />
+        <line x1="2000" y1="1500" x2="2650" y2="1850" class="connector-line" />
+
+        <!-- Satellite Connectors (Module 1: Smart Check-In) -->
+        <line x1="2000" y1="850" x2="1620" y2="680" class="connector-line" />
+        <line x1="2000" y1="850" x2="2380" y2="680" class="connector-line" />
+        <line x1="2000" y1="850" x2="2520" y2="860" class="connector-line" />
+        <line x1="2000" y1="850" x2="2360" y2="1020" class="connector-line" />
+
+        <!-- Satellite Connectors (Module 2: Parent Comm) -->
+        <line x1="1350" y1="1200" x2="1000" y2="1020" class="connector-line" />
+        <line x1="1350" y1="1200" x2="940" y2="1200" class="connector-line" />
+        <line x1="1350" y1="1200" x2="1000" y2="1380" class="connector-line" />
+
+        <!-- Satellite Connectors (Module 3: Center Mgmt) -->
+        <line x1="2650" y1="1200" x2="3020" y2="1020" class="connector-line" />
+        <line x1="2650" y1="1200" x2="3080" y2="1180" class="connector-line" />
+        <line x1="2650" y1="1200" x2="3040" y2="1340" class="connector-line" />
+        <line x1="2650" y1="1200" x2="2950" y2="1480" class="connector-line" />
+
+        <!-- Satellite Connectors (Module 4: Attendance) -->
+        <line x1="1350" y1="1850" x2="980" y2="1700" class="connector-line" />
+        <line x1="1350" y1="1850" x2="940" y2="1880" class="connector-line" />
+        <line x1="1350" y1="1850" x2="980" y2="2060" class="connector-line" />
+
+        <!-- Satellite Connectors (Module 5: Kumon Tools) -->
+        <line x1="2000" y1="2150" x2="1720" y2="2420" class="connector-line" />
+        <line x1="2000" y1="2150" x2="2000" y2="2480" class="connector-line" />
+        <line x1="2000" y1="2150" x2="2280" y2="2420" class="connector-line" />
+
+        <!-- Satellite Connectors (Module 6: Safety) -->
+        <line x1="2650" y1="1850" x2="3020" y2="1700" class="connector-line" />
+        <line x1="2650" y1="1850" x2="3060" y2="1860" class="connector-line" />
+        <line x1="2650" y1="1850" x2="3020" y2="2020" class="connector-line" />
+      </svg>
+
+      <!-- ======================================================= -->
+      <!-- CENTER HUB: PRESENTLY LOGO & CORE SLOGAN                -->
+      <!-- ======================================================= -->
+      <div onclick="zoomToTarget(2000, 1500, 1.1, 0)" class="prezi-node bg-white border-4 border-cyan-600 shadow-[0_20px_50px_rgba(8,145,178,0.18)] z-10" style="left: 1775px; top: 1275px; width: 450px; height: 450px;">
+        <div class="w-20 h-20 rounded-3xl bg-cyan-50 border border-cyan-200 flex items-center justify-center text-4xl mb-3 shadow-inner">📖</div>
+        <h2 class="text-3xl font-black tracking-tight text-slate-900">PRESENTLY</h2>
+        <span class="text-xs uppercase tracking-widest font-extrabold text-cyan-700 mt-1">FOR KUMON CENTERS</span>
+        <p class="text-sm font-bold text-slate-600 mt-4 max-w-[280px]">Know who's here.<br>Know who's ready.</p>
+        <span class="mt-4 text-[11px] font-semibold text-cyan-800 bg-cyan-50 px-3 py-1 rounded-full border border-cyan-200 shadow-sm">Click to focus center</span>
+      </div>
+
+      <!-- ======================================================= -->
+      <!-- MODULE 1: SMART CHECK-IN / OUT (TEAL)                   -->
+      <!-- ======================================================= -->
+      <div onclick="zoomToTarget(2000, 850, 1.2, 1)" class="prezi-node bg-white border-4 border-teal-500 shadow-[0_15px_40px_rgba(20,184,166,0.15)] z-10" style="left: 1825px; top: 675px; width: 350px; height: 350px;">
+        <span class="w-9 h-9 rounded-full bg-teal-500 text-white font-black text-sm flex items-center justify-center mb-2 shadow-sm">1</span>
+        <div class="text-3xl mb-1">📱</div>
+        <h3 class="text-xl font-black text-teal-900">SMART CHECK-IN / OUT</h3>
+        <ul class="text-xs text-slate-600 font-medium mt-3 space-y-1 text-left px-6">
+          <li>• Student QR Scan In/Out</li>
+          <li>• Automatic Timers (30 / 60 min)</li>
+          <li>• Time to Dismiss alerts</li>
+          <li>• Live Dashboard</li>
+        </ul>
+      </div>
+
+      <!-- Sub-nodes for Module 1 -->
+      <div onclick="zoomToTarget(1620, 680, 2.0, 1)" class="sub-node bg-teal-500 border-2 border-teal-600 text-white shadow-lg z-20" style="left: 1530px; top: 590px; width: 180px; height: 180px;">
+        <span class="text-xl mb-1">🔔</span>
+        <h4 class="text-xs font-extrabold">Automatic Parent Alerts</h4>
+        <p class="text-[9px] text-teal-50 mt-1 px-3">Instant arrival/leave notifications</p>
+      </div>
+      <div onclick="zoomToTarget(2380, 680, 2.0, 1)" class="sub-node bg-teal-500 border-2 border-teal-600 text-white shadow-lg z-20" style="left: 2290px; top: 590px; width: 180px; height: 180px;">
+        <span class="text-xl mb-1">⏱️</span>
+        <h4 class="text-xs font-extrabold">Automatic Timers</h4>
+        <p class="text-[9px] text-teal-50 mt-1 px-3">30 min (1 subj) / 60 min (2 subj)</p>
+      </div>
+      <div onclick="zoomToTarget(2520, 860, 2.0, 1)" class="sub-node bg-teal-500 border-2 border-teal-600 text-white shadow-lg z-20" style="left: 2435px; top: 775px; width: 170px; height: 170px;">
+        <span class="text-xl mb-1">🚨</span>
+        <h4 class="text-xs font-extrabold">Time to Dismiss</h4>
+        <p class="text-[9px] text-teal-50 mt-1 px-3">Color-coded alerts when up</p>
+      </div>
+      <div onclick="zoomToTarget(2360, 1020, 2.0, 1)" class="sub-node bg-teal-500 border-2 border-teal-600 text-white shadow-lg z-20" style="left: 2275px; top: 935px; width: 170px; height: 170px;">
+        <span class="text-xl mb-1">✍️</span>
+        <h4 class="text-xs font-extrabold">Manual Checkout</h4>
+        <p class="text-[9px] text-teal-50 mt-1 px-3">Forgot to scan backup</p>
+      </div>
+
+
+      <!-- ======================================================= -->
+      <!-- MODULE 2: PARENT COMMUNICATION (PURPLE)                 -->
+      <!-- ======================================================= -->
+      <div onclick="zoomToTarget(1350, 1200, 1.2, 2)" class="prezi-node bg-white border-4 border-purple-500 shadow-[0_15px_40px_rgba(168,85,247,0.15)] z-10" style="left: 1175px; top: 1025px; width: 350px; height: 350px;">
+        <span class="w-9 h-9 rounded-full bg-purple-600 text-white font-black text-sm flex items-center justify-center mb-2 shadow-sm">2</span>
+        <div class="text-3xl mb-1">💬</div>
+        <h3 class="text-xl font-black text-purple-950">PARENT COMMUNICATION</h3>
+        <ul class="text-xs text-slate-600 font-medium mt-3 space-y-1 text-left px-6">
+          <li>• Two-Way Messaging</li>
+          <li>• Broadcast Messages</li>
+          <li>• Scheduled Broadcasts</li>
+          <li>• Quick Parent Responses</li>
+        </ul>
+      </div>
+
+      <!-- Sub-nodes for Module 2 -->
+      <div onclick="zoomToTarget(1000, 1020, 2.0, 2)" class="sub-node bg-purple-600 border-2 border-purple-700 text-white shadow-lg z-20" style="left: 915px; top: 935px; width: 170px; height: 170px;">
+        <span class="text-xl mb-1">✉️</span>
+        <h4 class="text-xs font-extrabold">Two-Way Messaging</h4>
+        <p class="text-[9px] text-purple-100 mt-1 px-3">Direct parent-instructor chat</p>
+      </div>
+      <div onclick="zoomToTarget(940, 1200, 2.0, 2)" class="sub-node bg-purple-600 border-2 border-purple-700 text-white shadow-lg z-20" style="left: 855px; top: 1115px; width: 170px; height: 170px;">
+        <span class="text-xl mb-1">📢</span>
+        <h4 class="text-xs font-extrabold">Broadcast Messages</h4>
+        <p class="text-[9px] text-purple-100 mt-1 px-3">Send to one, many, or all</p>
+      </div>
+      <div onclick="zoomToTarget(1000, 1380, 2.0, 2)" class="sub-node bg-purple-600 border-2 border-purple-700 text-white shadow-lg z-20" style="left: 915px; top: 1295px; width: 170px; height: 170px;">
+        <span class="text-xl mb-1">📅</span>
+        <h4 class="text-xs font-extrabold">Scheduled Broadcasts</h4>
+        <p class="text-[9px] text-purple-100 mt-1 px-3">Plan announcements ahead</p>
+      </div>
+
+
+      <!-- ======================================================= -->
+      <!-- MODULE 3: CENTER MANAGEMENT (BLUE)                      -->
+      <!-- ======================================================= -->
+      <div onclick="zoomToTarget(2650, 1200, 1.2, 3)" class="prezi-node bg-white border-4 border-sky-600 shadow-[0_15px_40px_rgba(2,132,199,0.15)] z-10" style="left: 2475px; top: 1025px; width: 350px; height: 350px;">
+        <span class="w-9 h-9 rounded-full bg-sky-600 text-white font-black text-sm flex items-center justify-center mb-2 shadow-sm">3</span>
+        <div class="text-3xl mb-1">🏢</div>
+        <h3 class="text-xl font-black text-sky-950">CENTER MANAGEMENT</h3>
+        <ul class="text-xs text-slate-600 font-medium mt-3 space-y-1 text-left px-6">
+          <li>• Student Profiles</li>
+          <li>• KSIS Mass Import</li>
+          <li>• Multiple Centers Support</li>
+          <li>• Staff Access Levels</li>
+        </ul>
+      </div>
+
+      <!-- Sub-nodes for Module 3 -->
+      <div onclick="zoomToTarget(3020, 1020, 2.0, 3)" class="sub-node bg-sky-600 border-2 border-sky-700 text-white shadow-lg z-20" style="left: 2935px; top: 935px; width: 170px; height: 170px;">
+        <span class="text-xl mb-1">👤</span>
+        <h4 class="text-xs font-extrabold">Student Profiles</h4>
+        <p class="text-[9px] text-sky-100 mt-1 px-3">Time limits, subjects, rooms</p>
+      </div>
+      <div onclick="zoomToTarget(3080, 1180, 2.0, 3)" class="sub-node bg-sky-600 border-2 border-sky-700 text-white shadow-lg z-20" style="left: 2995px; top: 1095px; width: 170px; height: 170px;">
+        <span class="text-xl mb-1">⚡</span>
+        <h4 class="text-xs font-extrabold">KSIS Mass Import</h4>
+        <p class="text-[9px] text-sky-100 mt-1 px-3">1-time roster sync</p>
+      </div>
+      <div onclick="zoomToTarget(3040, 1340, 2.0, 3)" class="sub-node bg-sky-600 border-2 border-sky-700 text-white shadow-lg z-20" style="left: 2955px; top: 1255px; width: 170px; height: 170px;">
+        <span class="text-xl mb-1">🏛️</span>
+        <h4 class="text-xs font-extrabold">Multiple Centers</h4>
+        <p class="text-[9px] text-sky-100 mt-1 px-3">Manage from 1 account</p>
+      </div>
+      <div onclick="zoomToTarget(2950, 1480, 2.0, 3)" class="sub-node bg-sky-600 border-2 border-sky-700 text-white shadow-lg z-20" style="left: 2865px; top: 1395px; width: 170px; height: 170px;">
+        <span class="text-xl mb-1">🛑</span>
+        <h4 class="text-xs font-extrabold">Auto Deactivate</h4>
+        <p class="text-[9px] text-sky-100 mt-1 px-3">Inactive 60 days pruned</p>
+      </div>
+
+
+      <!-- ======================================================= -->
+      <!-- MODULE 4: ATTENDANCE & REPORTS (GREEN)                  -->
+      <!-- ======================================================= -->
+      <div onclick="zoomToTarget(1350, 1850, 1.2, 4)" class="prezi-node bg-white border-4 border-emerald-600 shadow-[0_15px_40px_rgba(5,150,105,0.15)] z-10" style="left: 1175px; top: 1675px; width: 350px; height: 350px;">
+        <span class="w-9 h-9 rounded-full bg-emerald-600 text-white font-black text-sm flex items-center justify-center mb-2 shadow-sm">4</span>
+        <div class="text-3xl mb-1">📊</div>
+        <h3 class="text-xl font-black text-emerald-950">ATTENDANCE & REPORTS</h3>
+        <ul class="text-xs text-slate-600 font-medium mt-3 space-y-1 text-left px-6">
+          <li>• Attendance History</li>
+          <li>• Absence Tracking</li>
+          <li>• Custom Reports</li>
+          <li>• Export & Filter Data</li>
+        </ul>
+      </div>
+
+      <!-- Sub-nodes for Module 4 -->
+      <div onclick="zoomToTarget(980, 1700, 2.0, 4)" class="sub-node bg-emerald-600 border-2 border-emerald-700 text-white shadow-lg z-20" style="left: 895px; top: 1615px; width: 170px; height: 170px;">
+        <span class="text-xl mb-1">📜</span>
+        <h4 class="text-xs font-extrabold">Attendance History</h4>
+        <p class="text-[9px] text-emerald-100 mt-1 px-3">Detailed fingertip records</p>
+      </div>
+      <div onclick="zoomToTarget(940, 1880, 2.0, 4)" class="sub-node bg-emerald-600 border-2 border-emerald-700 text-white shadow-lg z-20" style="left: 855px; top: 1795px; width: 170px; height: 170px;">
+        <span class="text-xl mb-1">⚠️</span>
+        <h4 class="text-xs font-extrabold">Absence Reports</h4>
+        <p class="text-[9px] text-emerald-100 mt-1 px-3">Track missing days</p>
+      </div>
+      <div onclick="zoomToTarget(980, 2060, 2.0, 4)" class="sub-node bg-emerald-600 border-2 border-emerald-700 text-white shadow-lg z-20" style="left: 895px; top: 1975px; width: 170px; height: 170px;">
+        <span class="text-xl mb-1">📑</span>
+        <h4 class="text-xs font-extrabold">Custom Reports</h4>
+        <p class="text-[9px] text-emerald-100 mt-1 px-3">Filter date, room, subject</p>
+      </div>
+
+
+      <!-- ======================================================= -->
+      <!-- MODULE 5: KUMON-SPECIFIC TOOLS (VIOLET)                 -->
+      <!-- ======================================================= -->
+      <div onclick="zoomToTarget(2000, 2150, 1.2, 5)" class="prezi-node bg-white border-4 border-violet-600 shadow-[0_15px_40px_rgba(124,58,237,0.15)] z-10" style="left: 1825px; top: 1975px; width: 350px; height: 350px;">
+        <span class="w-9 h-9 rounded-full bg-violet-600 text-white font-black text-sm flex items-center justify-center mb-2 shadow-sm">5</span>
+        <div class="text-3xl mb-1">🎓</div>
+        <h3 class="text-xl font-black text-violet-950">KUMON-SPECIFIC TOOLS</h3>
+        <ul class="text-xs text-slate-600 font-medium mt-3 space-y-1 text-left px-6">
+          <li>• Subject-Based Timing</li>
+          <li>• EL / PI / MAIN Areas</li>
+          <li>• Kumon Connect Friendly</li>
+          <li>• Tablet & Paper Support</li>
+        </ul>
+      </div>
+
+      <!-- Sub-nodes for Module 5 -->
+      <div onclick="zoomToTarget(1720, 2420, 2.0, 5)" class="sub-node bg-violet-600 border-2 border-violet-700 text-white shadow-lg z-20" style="left: 1635px; top: 2335px; width: 170px; height: 170px;">
+        <span class="text-xl mb-1">⏲️</span>
+        <h4 class="text-xs font-extrabold">Subject Timing</h4>
+        <p class="text-[9px] text-violet-100 mt-1 px-3">30 min (1) / 60 min (2)</p>
+      </div>
+      <div onclick="zoomToTarget(2000, 2480, 2.0, 5)" class="sub-node bg-violet-600 border-2 border-violet-700 text-white shadow-lg z-20" style="left: 1915px; top: 2395px; width: 170px; height: 170px;">
+        <span class="text-xl mb-1">🚪</span>
+        <h4 class="text-xs font-extrabold">EL / PI / MAIN</h4>
+        <p class="text-[9px] text-violet-100 mt-1 px-3">Organize your center zones</p>
+      </div>
+      <div onclick="zoomToTarget(2280, 2420, 2.0, 5)" class="sub-node bg-violet-600 border-2 border-violet-700 text-white shadow-lg z-20" style="left: 2195px; top: 2335px; width: 170px; height: 170px;">
+        <span class="text-xl mb-1">💻</span>
+        <h4 class="text-xs font-extrabold">Kumon Connect</h4>
+        <p class="text-[9px] text-violet-100 mt-1 px-3">Tablet & paper friendly</p>
+      </div>
+
+
+      <!-- ======================================================= -->
+      <!-- MODULE 6: SAFETY & SECURITY (AMBER)                     -->
+      <!-- ======================================================= -->
+      <div onclick="zoomToTarget(2650, 1850, 1.2, 6)" class="prezi-node bg-white border-4 border-amber-500 shadow-[0_15px_40px_rgba(245,158,11,0.15)] z-10" style="left: 2475px; top: 1675px; width: 350px; height: 350px;">
+        <span class="w-9 h-9 rounded-full bg-amber-500 text-white font-black text-sm flex items-center justify-center mb-2 shadow-sm">6</span>
+        <div class="text-3xl mb-1">🛡️</div>
+        <h3 class="text-xl font-black text-amber-950">SAFETY & SECURITY</h3>
+        <ul class="text-xs text-slate-600 font-medium mt-3 space-y-1 text-left px-6">
+          <li>• Secure & Compliant</li>
+          <li>• PII Protection</li>
+          <li>• 2-Year Record Retention</li>
+          <li>• Trusted & Reliable</li>
+        </ul>
+      </div>
+
+      <!-- Sub-nodes for Module 6 -->
+      <div onclick="zoomToTarget(3020, 1700, 2.0, 6)" class="sub-node bg-amber-500 border-2 border-amber-600 text-white shadow-lg z-20" style="left: 2935px; top: 1615px; width: 170px; height: 170px;">
+        <span class="text-xl mb-1">🔒</span>
+        <h4 class="text-xs font-extrabold">Secure & Compliant</h4>
+        <p class="text-[9px] text-amber-50 mt-1 px-3">Industry-standard encryption</p>
+      </div>
+      <div onclick="zoomToTarget(3060, 1860, 2.0, 6)" class="sub-node bg-amber-500 border-2 border-amber-600 text-white shadow-lg z-20" style="left: 2975px; top: 1775px; width: 170px; height: 170px;">
+        <span class="text-xl mb-1">🛡️</span>
+        <h4 class="text-xs font-extrabold">PII Protection</h4>
+        <p class="text-[9px] text-amber-50 mt-1 px-3">Personal info separated</p>
+      </div>
+      <div onclick="zoomToTarget(3020, 2020, 2.0, 6)" class="sub-node bg-amber-500 border-2 border-amber-600 text-white shadow-lg z-20" style="left: 2935px; top: 1935px; width: 170px; height: 170px;">
+        <span class="text-xl mb-1">🗄️</span>
+        <h4 class="text-xs font-extrabold">2-Year Retention</h4>
+        <p class="text-[9px] text-amber-50 mt-1 px-3">Meets Kumon legal standards</p>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const world = document.getElementById('world');
+    const stepLabel = document.getElementById('step-counter');
+
+    // Prezi Presentation Path Coordinates: [X, Y, ZoomLevel, StepNumber, Label]
+    const presentationPath = [
+      { x: 2000, y: 1500, scale: 0.42, step: 0, label: "OVERVIEW (0 / 6)" },
+      { x: 2000, y: 850, scale: 1.15, step: 1, label: "1. SMART CHECK-IN / OUT" },
+      { x: 1350, y: 1200, scale: 1.15, step: 2, label: "2. PARENT COMMUNICATION" },
+      { x: 2650, y: 1200, scale: 1.15, step: 3, label: "3. CENTER MANAGEMENT" },
+      { x: 1350, y: 1850, scale: 1.15, step: 4, label: "4. ATTENDANCE & REPORTS" },
+      { x: 2000, y: 2150, scale: 1.15, step: 5, label: "5. KUMON-SPECIFIC TOOLS" },
+      { x: 2650, y: 1850, scale: 1.15, step: 6, label: "6. SAFETY & SECURITY" }
+    ];
+
+    let currentStepIndex = 0;
+
+    function zoomToTarget(targetX, targetY, scale, stepNumber) {
+      const screenW = window.innerWidth;
+      const screenH = window.innerHeight;
+
+      // Center the camera on the target point
+      const transX = (screenW / 2) - (targetX * scale);
+      const transY = (screenH / 2) - (targetY * scale);
+
+      world.style.transform = `translate3d(${transX}px, ${transY}px, 0px) scale(${scale})`;
+      
+      if (typeof stepNumber !== 'undefined') {
+        currentStepIndex = stepNumber;
+        stepLabel.innerText = presentationPath[stepNumber]?.label || `FOCUSED NODE`;
+      }
+    }
+
+    function nextStep() {
+      currentStepIndex = (currentStepIndex + 1) % presentationPath.length;
+      const target = presentationPath[currentStepIndex];
+      zoomToTarget(target.x, target.y, target.scale, target.step);
+    }
+
+    function prevStep() {
+      currentStepIndex = (currentStepIndex - 1 + presentationPath.length) % presentationPath.length;
+      const target = presentationPath[currentStepIndex];
+      zoomToTarget(target.x, target.y, target.scale, target.step);
+    }
+
+    // Keyboard support (Space, Right Arrow, Left Arrow)
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space' || e.code === 'ArrowRight') {
+        e.preventDefault();
+        nextStep();
+      } else if (e.code === 'ArrowLeft') {
+        e.preventDefault();
+        prevStep();
+      } else if (e.code === 'Escape') {
+        zoomToTarget(2000, 1500, 0.42, 0);
+      }
+    });
+
+    // Resize recalculation
+    window.addEventListener('resize', () => {
+      const target = presentationPath[currentStepIndex];
+      zoomToTarget(target.x, target.y, target.scale, target.step);
+    });
+
+    // Initialize in Overview Position
+    setTimeout(() => {
+      zoomToTarget(2000, 1500, 0.42, 0);
+    }, 100);
+  </script>
+</body>
+</html>

@@ -8,7 +8,13 @@ export default function Navbar({ links }: { links?: NavLink[] }) {
     <header>
       <div className="wrap nav">
         <a className="wordmark" href="/">
-          <img src="/logo.png" alt="Presently" width={32} height={32} style={{ borderRadius: "50%" }} />
+          <img
+            src="/logo.png"
+            alt="Presently"
+            width={32}
+            height={32}
+            style={{ borderRadius: "50%" }}
+          />
           Presently
         </a>
         <div className="nav-right">
@@ -22,7 +28,7 @@ export default function Navbar({ links }: { links?: NavLink[] }) {
             </nav>
           )}
           <a className="btn btn-primary" href="/partner">
-            Get Presently
+            Get Powered
           </a>
         </div>
       </div>

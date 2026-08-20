@@ -9,12 +9,13 @@ export default function Home() {
   return (
     <>
       <div className="hero-viewport">
-        <Navbar links={[
-          { label: "How it works", href: "#how" },
-          { label: "Features", href: "/features" },
-          { label: "Demo", href: "#demo" },
-          { label: "Partner with us", href: "/partner" },
-        ]} />
+        <Navbar
+          links={[
+            { label: "How it works", href: "#how" },
+            { label: "Features", href: "/features" },
+            { label: "Demo", href: "#demo" },
+          ]}
+        />
         <Hero />
       </div>
       <main>

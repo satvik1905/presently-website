@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AddressAutocomplete, { type AddressParts } from "@/components/AddressAutocomplete";
 
 const PLANS = {
   standard: {
@@ -46,11 +47,17 @@ function CheckoutForm() {
 
   const [form, setForm] = useState({
     centerName: "",
-    location: "",
+    locationDisplay: "",
     firstName: "",
     lastName: "",
     emailUser: "",
     code: "",
+  });
+  const [addressParts, setAddressParts] = useState({
+    center_street: "",
+    center_city: "",
+    center_state: "",
+    center_zip: "",
   });
   const [promo, setPromo] = useState<PromoResult | null>(null);
   const [codeError, setCodeError] = useState("");
@@ -129,7 +136,8 @@ function CheckoutForm() {
     form.centerName.trim() &&
     form.firstName.trim() &&
     form.lastName.trim() &&
-    form.emailUser.trim();
+    form.emailUser.trim() &&
+    form.locationDisplay.trim();
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -148,7 +156,10 @@ function CheckoutForm() {
           customerEmail: `${form.emailUser.trim()}@ikumon.com`,
           centerName: form.centerName.trim(),
           customerName: `${form.firstName.trim()} ${form.lastName.trim()}`,
-          location: form.location.trim(),
+          center_street: addressParts.center_street,
+          center_city: addressParts.center_city,
+          center_state: addressParts.center_state,
+          center_zip: addressParts.center_zip,
         }),
       });
       const data = await res.json();
@@ -263,13 +274,18 @@ function CheckoutForm() {
 
                 <div className="cta-field">
                   <label className="cta-label">Location <span style={{ color: "#DC2626" }}>*</span></label>
-                  <input
-                    type="text"
-                    className="cta-input"
-                    placeholder="Carmel, California"
-                    required
-                    value={form.location}
-                    onChange={(e) => update("location", e.target.value)}
+                  <AddressAutocomplete
+                    value={form.locationDisplay}
+                    onChange={(val) => update("locationDisplay", val)}
+                    onSelect={(addr: AddressParts) => {
+                      update("locationDisplay", addr.formatted);
+                      setAddressParts({
+                        center_street: addr.street,
+                        center_city: addr.city,
+                        center_state: addr.state,
+                        center_zip: addr.zip,
+                      });
+                    }}
                   />
                 </div>
 

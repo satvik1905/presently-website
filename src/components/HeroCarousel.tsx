@@ -39,9 +39,10 @@ function HereNowSlide() {
   const [elapsed, setElapsed] = useState(() =>
     students.map((s) => s.start)
   );
-  const [clock, setClock] = useState(formatClock);
+  const [clock, setClock] = useState("");
 
   useEffect(() => {
+    setClock(formatClock());
     const tid = setInterval(() => {
       setElapsed((prev) => prev.map((t) => t + 1));
     }, 1000);

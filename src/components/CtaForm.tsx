@@ -2,20 +2,20 @@
 
 import { useState } from "react";
 
+const red = { color: "#DC2626" } as const;
+
 export default function CtaForm() {
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
-    email: "",
+    emailUser: "",
     centerName: "",
-    students: "1",
-    notes: "",
   });
 
   const filled =
     form.firstName.trim() &&
     form.lastName.trim() &&
-    form.email.trim() &&
+    form.emailUser.trim() &&
     form.centerName.trim();
 
   function update(field: keyof typeof form, value: string) {
@@ -32,13 +32,14 @@ export default function CtaForm() {
     >
       <div className="cta-form-header">
         <h3>Request a demo</h3>
-        <p>We&rsquo;ll reach out within one business day.</p>
+        <p>Tell us a little about your center and we&rsquo;ll be in touch.</p>
       </div>
 
+      {/* Name row */}
       <div className="cta-field">
         <div className="cta-form-row">
           <div>
-            <label className="cta-label">Instructor&rsquo;s first name <span style={{ color: "#DC2626" }}>*</span></label>
+            <label className="cta-label">Instructor first name <span style={red}>*</span></label>
             <input
               type="text"
               placeholder="Maya"
@@ -49,7 +50,7 @@ export default function CtaForm() {
             />
           </div>
           <div>
-            <label className="cta-label">Instructor&rsquo;s last name <span style={{ color: "#DC2626" }}>*</span></label>
+            <label className="cta-label">Instructor last name <span style={red}>*</span></label>
             <input
               type="text"
               placeholder="Rodriguez"
@@ -62,20 +63,42 @@ export default function CtaForm() {
         </div>
       </div>
 
+      {/* Email */}
       <div className="cta-field">
-        <label className="cta-label">Work email <span style={{ color: "#DC2626" }}>*</span></label>
-        <input
-          type="email"
-          placeholder="maya@kumoncarmel.com"
-          required
-          value={form.email}
-          onChange={(e) => update("email", e.target.value)}
-          className="cta-input"
-        />
+        <label className="cta-label">Center email <span style={red}>*</span></label>
+        <div style={{ display: "flex", alignItems: "stretch" }}>
+          <input
+            type="text"
+            className="cta-input"
+            style={{ borderTopRightRadius: 0, borderBottomRightRadius: 0, borderRight: "none" }}
+            placeholder="maya"
+            required
+            value={form.emailUser}
+            onChange={(e) => update("emailUser", e.target.value)}
+          />
+          <span
+            className="cta-input"
+            style={{
+              borderTopLeftRadius: 0,
+              borderBottomLeftRadius: 0,
+              background: "var(--color-bg)",
+              color: "var(--color-muted)",
+              whiteSpace: "nowrap",
+              userSelect: "none",
+              display: "flex",
+              alignItems: "center",
+              width: "auto",
+              flexShrink: 0,
+            }}
+          >
+            @ikumon.com
+          </span>
+        </div>
       </div>
 
+      {/* Center name */}
       <div className="cta-field">
-        <label className="cta-label">Center name <span style={{ color: "#DC2626" }}>*</span></label>
+        <label className="cta-label">Center name <span style={red}>*</span></label>
         <input
           type="text"
           placeholder="Kumon Carmel"
@@ -86,32 +109,10 @@ export default function CtaForm() {
         />
       </div>
 
-      <div className="cta-field">
-        <label className="cta-label">How many centers do you operate? <span style={{ color: "#DC2626" }}>*</span></label>
-        <select
-          className="cta-input cta-select"
-          value={form.students}
-          onChange={(e) => update("students", e.target.value)}
-        >
-          <option>1</option>
-          <option>2+</option>
-        </select>
-      </div>
-
-      <div className="cta-field">
-        <label className="cta-label">Anything specific you&rsquo;d like to see?</label>
-        <textarea
-          className="cta-input cta-textarea"
-          placeholder="e.g. How parent texting works, multi-center setup..."
-          value={form.notes}
-          onChange={(e) => update("notes", e.target.value)}
-        />
-      </div>
-
       <button type="submit" className="btn btn-primary cta-submit" disabled={!filled}>
         Request a demo
       </button>
-      <p className="cta-fine">No credit card. No 14-day trial clock.</p>
+      <p className="cta-fine">See it in action. Then try Presently free for 7 days.</p>
     </form>
   );
 }

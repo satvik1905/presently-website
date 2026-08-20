@@ -1398,7 +1398,7 @@ blockquote {
   flex-shrink: 0;
 }
 .cta-right {
-  background: #fff;
+  background: #F9FAFB;
   padding: 36px 32px;
   border-radius: var(--radius-xl);
   border: 1px solid var(--line);

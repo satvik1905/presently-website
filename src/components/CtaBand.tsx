@@ -2,7 +2,7 @@ import CtaForm from "./CtaForm";
 
 export default function CtaBand() {
   return (
-    <section id="demo">
+    <section id="demo" className="tinted">
       <div className="wrap">
         <div className="cta-split">
           <div className="cta-left">

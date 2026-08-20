@@ -21,8 +21,8 @@ export default function Navbar({ links }: { links?: NavLink[] }) {
               ))}
             </nav>
           )}
-          <a className="btn btn-primary" href="#demo">
-            Contact Us
+          <a className="btn btn-primary" href="/partner">
+            Get Presently
           </a>
         </div>
       </div>

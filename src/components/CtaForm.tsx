@@ -10,13 +10,15 @@ export default function CtaForm() {
     lastName: "",
     emailUser: "",
     centerName: "",
+    phone: "",
   });
 
   const filled =
     form.firstName.trim() &&
     form.lastName.trim() &&
     form.emailUser.trim() &&
-    form.centerName.trim();
+    form.centerName.trim() &&
+    form.phone.trim();
 
   function update(field: keyof typeof form, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -105,6 +107,19 @@ export default function CtaForm() {
           required
           value={form.centerName}
           onChange={(e) => update("centerName", e.target.value)}
+          className="cta-input"
+        />
+      </div>
+
+      {/* Phone */}
+      <div className="cta-field">
+        <label className="cta-label">Phone number <span style={red}>*</span></label>
+        <input
+          type="tel"
+          placeholder="(555) 123-4567"
+          required
+          value={form.phone}
+          onChange={(e) => update("phone", e.target.value)}
           className="cta-input"
         />
       </div>

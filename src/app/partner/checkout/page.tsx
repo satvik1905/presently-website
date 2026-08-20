@@ -156,6 +156,7 @@ function CheckoutForm() {
           customerEmail: `${form.emailUser.trim()}@ikumon.com`,
           centerName: form.centerName.trim(),
           customerName: `${form.firstName.trim()} ${form.lastName.trim()}`,
+          center_address: form.locationDisplay.trim(),
           center_street: addressParts.center_street,
           center_city: addressParts.center_city,
           center_state: addressParts.center_state,

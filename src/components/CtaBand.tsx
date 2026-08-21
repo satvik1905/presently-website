@@ -3,7 +3,7 @@ import CtaForm from "./CtaForm";
 export default function CtaBand() {
   return (
     <section id="demo" className="tinted">
-      <div className="wrap">
+      <div className="wrap !px-0">
         <div className="cta-split">
           <div className="cta-left">
             <span className="stamp">STOP WONDERING WHO&rsquo;S STILL HERE</span>

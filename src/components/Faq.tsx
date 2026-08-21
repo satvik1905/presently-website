@@ -5,7 +5,7 @@ import { useState } from "react";
 const ITEMS = [
   {
     q: "Can I cancel anytime?",
-    a: "Yes. Cancel from your billing portal whenever you want. No contracts, no cancellation fees.",
+    a: "Yes. Cancel anytime — no contracts, no cancellation fees. Just email admin@presently.now and we'll take care of it.",
   },
   {
     q: "What happens after the pilot?",

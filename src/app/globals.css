@@ -69,22 +69,12 @@
 }
 
 .wrap {
-  max-width: var(--maxw);
+  max-width: 1120px;
   margin: 0 auto;
   padding: 0 24px;
 }
 .wrap.wrap-wide {
   max-width: 1360px;
-}
-@media (min-width: 1440px) {
-  .wrap {
-    max-width: none;
-    padding: 0 160px;
-  }
-  .wrap.wrap-wide {
-    max-width: none;
-    padding: 0 120px;
-  }
 }
 
 /* Nav: migrated to Tailwind in Navbar component */

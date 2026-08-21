@@ -4,7 +4,7 @@ import HeroCarousel from "./HeroCarousel";
 export default function Hero() {
   return (
     <section className="hero">
-      <div className="wrap hero-grid">
+      <div className="wrap hero-grid !px-0">
         <div>
           <span className="stamp">BUILT FOR THE WAY KUMON CENTERS RUN</span>
           <h1>

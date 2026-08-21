@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import Stripe from "stripe";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { LinkButton } from "@/components/Button";
 
 function getStripe() {
   return new Stripe(process.env.STRIPE_SECRET_KEY!);
@@ -66,9 +67,7 @@ export default async function WelcomePage(props: PageProps<"/partner/welcome">) 
                   </>
                 )}
               </p>
-              <a href="/" className="btn btn-primary btn-lg">
-                Back to home
-              </a>
+              <LinkButton href="/" size="lg">Back to home</LinkButton>
             </div>
           </div>
         </section>

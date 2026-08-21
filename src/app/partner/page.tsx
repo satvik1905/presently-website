@@ -1,7 +1,7 @@
-import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Faq from "@/components/Faq";
+import { LinkButton } from "@/components/Button";
 
 const PLANS = [
   {
@@ -87,12 +87,14 @@ export default function PartnerPage() {
                     <span className="plan-price-period">/month</span>
                   </div>
 
-                  <Link
+                  <LinkButton
                     href={`/partner/checkout?plan=${p.key}`}
-                    className={`btn ${p.isPro ? "btn-primary" : "btn-ghost"} plan-select-btn`}
+                    variant={p.isPro ? "primary" : "ghost"}
+                    fullWidth
+                    className="mb-[18px]"
                   >
                     {p.cta}
-                  </Link>
+                  </LinkButton>
 
                   <ul className="plan-features">
                     {p.features.map((f) => (

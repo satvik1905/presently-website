@@ -6,6 +6,10 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AddressAutocomplete, { type AddressParts } from "@/components/AddressAutocomplete";
+import { Button } from "@/components/Button";
+import TextField from "@/components/ui/TextField";
+import EmailField from "@/components/ui/EmailField";
+import FieldError from "@/components/ui/FieldError";
 
 const PLANS = {
   standard: {
@@ -234,47 +238,39 @@ function CheckoutForm() {
               </div>
 
               <form onSubmit={handleSubmit}>
-                <div className="cta-field">
-                  <label className="cta-label">Center name <span style={{ color: "#DC2626" }}>*</span></label>
-                  <input
-                    type="text"
-                    className="cta-input"
-                    placeholder="Kumon Carmel"
-                    required
-                    value={form.centerName}
-                    onChange={(e) => update("centerName", e.target.value)}
-                  />
-                </div>
+                <TextField
+                  label="Center name"
+                  placeholder="Kumon Carmel"
+                  required
+                  value={form.centerName}
+                  onChange={(v) => update("centerName", v)}
+                />
 
-                <div className="cta-field">
-                  <div className="cta-form-row">
-                    <div>
-                      <label className="cta-label">First name <span style={{ color: "#DC2626" }}>*</span></label>
-                      <input
-                        type="text"
-                        className="cta-input"
-                        placeholder="Maya"
-                        required
-                        value={form.firstName}
-                        onChange={(e) => update("firstName", e.target.value)}
-                      />
-                    </div>
-                    <div>
-                      <label className="cta-label">Last name <span style={{ color: "#DC2626" }}>*</span></label>
-                      <input
-                        type="text"
-                        className="cta-input"
-                        placeholder="Rodriguez"
-                        required
-                        value={form.lastName}
-                        onChange={(e) => update("lastName", e.target.value)}
-                      />
-                    </div>
+                <div className="mb-4">
+                  <div className="grid grid-cols-2 gap-3.5 max-md:grid-cols-1">
+                    <TextField
+                      label="First name"
+                      placeholder="Maya"
+                      required
+                      value={form.firstName}
+                      onChange={(v) => update("firstName", v)}
+                      className="!mb-0"
+                    />
+                    <TextField
+                      label="Last name"
+                      placeholder="Rodriguez"
+                      required
+                      value={form.lastName}
+                      onChange={(v) => update("lastName", v)}
+                      className="!mb-0"
+                    />
                   </div>
                 </div>
 
-                <div className="cta-field">
-                  <label className="cta-label">Location <span style={{ color: "#DC2626" }}>*</span></label>
+                <div className="mb-4">
+                  <label className="block text-[13.5px] font-medium text-[#101828] mb-1.5">
+                    Location <span className="text-[#DC2626]">*</span>
+                  </label>
                   <AddressAutocomplete
                     value={form.locationDisplay}
                     onChange={(val) => update("locationDisplay", val)}
@@ -290,41 +286,17 @@ function CheckoutForm() {
                   />
                 </div>
 
-                <div className="cta-field">
-                  <label className="cta-label">Work email</label>
-                  <div style={{ display: "flex", alignItems: "stretch" }}>
-                    <input
-                      type="text"
-                      className="cta-input"
-                      style={{ borderTopRightRadius: 0, borderBottomRightRadius: 0, borderRight: "none" }}
-                      placeholder="maya"
-                      required
-                      value={form.emailUser}
-                      onChange={(e) => update("emailUser", e.target.value)}
-                    />
-                    <span
-                      className="cta-input"
-                      style={{
-                        borderTopLeftRadius: 0,
-                        borderBottomLeftRadius: 0,
-                        background: "var(--color-bg)",
-                        color: "var(--color-muted)",
-                        whiteSpace: "nowrap",
-                        userSelect: "none",
-                        display: "flex",
-                        alignItems: "center",
-                        width: "auto",
-                        flexShrink: 0,
-                      }}
-                    >
-                      @ikumon.com
-                    </span>
-                  </div>
-                </div>
+                <EmailField
+                  label="Work email"
+                  username={form.emailUser}
+                  onUsernameChange={(v) => update("emailUser", v)}
+                  domain="@ikumon.com"
+                  required
+                />
 
                 {/* Promo code */}
-                <div className="cta-field">
-                  <label className="cta-label">Pilot code (optional)</label>
+                <div className="mb-4">
+                  <label className="block text-[13.5px] font-medium text-[#101828] mb-1.5">Pilot code (optional)</label>
                   {promo ? (
                     <div
                       style={{
@@ -369,10 +341,10 @@ function CheckoutForm() {
                       </button>
                     </div>
                   ) : (
-                    <div className="promo-input-row">
+                    <div className="flex gap-2.5">
                       <input
                         type="text"
-                        className="cta-input"
+                        className="w-full font-[inherit] text-sm py-3 px-3.5 border border-[#E7E5DF] rounded-[8px] text-[#101828] bg-white transition-[border-color] duration-150 focus:outline-none focus:border-[#2563EB] focus:shadow-[0_0_0_3px_#EEF3FE] placeholder:text-[#B0B5BE] flex-1"
                         placeholder="e.g. KUMON25"
                         value={form.code}
                         onChange={(e) => {
@@ -386,17 +358,18 @@ function CheckoutForm() {
                           }
                         }}
                       />
-                      <button
+                      <Button
                         type="button"
-                        className="btn btn-ghost promo-apply-btn"
+                        variant="ghost"
+                        className="whitespace-nowrap min-w-[72px] justify-center"
                         onClick={() => validateCode()}
                         disabled={!form.code.trim() || codeLoading}
                       >
                         {codeLoading ? <span className="spinner" /> : "Apply"}
-                      </button>
+                      </Button>
                     </div>
                   )}
-                  {codeError && <p className="field-error">{codeError}</p>}
+                  <FieldError message={codeError} />
                 </div>
 
                 <div
@@ -417,23 +390,24 @@ function CheckoutForm() {
                   </span>
                 </div>
 
-                <button
+                <Button
                   type="submit"
-                  className="btn btn-primary cta-submit"
+                  fullWidth
+                  className="mt-1 font-semibold py-3.5"
                   disabled={!filled || submitting}
                 >
                   {submitting
                     ? "Redirecting to checkout..."
                     : "Continue to payment \u2192"}
-                </button>
+                </Button>
 
                 {submitError && (
-                  <p className="field-error" style={{ marginTop: 8 }}>
+                  <p className="text-[13.5px] text-[#DC2626] mt-2">
                     {submitError}
                   </p>
                 )}
 
-                <p className="cta-fine">
+                <p className="text-center text-[13px] text-[#5B6472] mt-3">
                   You&rsquo;ll be redirected to Stripe to complete payment. No
                   charge until you confirm.
                 </p>
@@ -477,24 +451,23 @@ function CheckoutForm() {
               your price will return to ${plan?.price.toFixed(2)}/mo.
             </p>
             <div style={{ display: "flex", gap: 10, justifyContent: "flex-end" }}>
-              <button
+              <Button
                 type="button"
-                className="btn btn-ghost"
+                variant="ghost"
                 onClick={() => setShowRemoveModal(false)}
               >
                 Keep coupon
-              </button>
-              <button
+              </Button>
+              <Button
                 type="button"
-                className="btn btn-primary"
-                style={{ background: "#DC2626", borderColor: "#DC2626" }}
+                variant="danger"
                 onClick={() => {
                   removePromo();
                   setShowRemoveModal(false);
                 }}
               >
                 Remove
-              </button>
+              </Button>
             </div>
           </div>
         </div>

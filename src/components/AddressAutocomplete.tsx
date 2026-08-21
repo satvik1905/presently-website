@@ -73,7 +73,7 @@ export default function AddressAutocomplete(props: Props) {
     return (
       <input
         type="text"
-        className="cta-input"
+        className="w-full font-[inherit] text-sm py-3 px-3.5 border border-[#E7E5DF] rounded-[8px] text-[#101828] bg-white transition-[border-color] duration-150 focus:outline-none focus:border-[#2563EB] focus:shadow-[0_0_0_3px_#EEF3FE] placeholder:text-[#B0B5BE]"
         placeholder="Loading address search..."
         disabled
       />
@@ -157,7 +157,7 @@ function AddressInput({ onSelect, value, onChange }: Props) {
         <input
           ref={inputRef}
           type="text"
-          className="cta-input"
+          className="w-full font-[inherit] text-sm py-3 px-3.5 border border-[#E7E5DF] rounded-[8px] text-[#101828] bg-white transition-[border-color] duration-150 focus:outline-none focus:border-[#2563EB] focus:shadow-[0_0_0_3px_#EEF3FE] placeholder:text-[#B0B5BE]"
           placeholder="Start typing an address..."
           required
           value={value}

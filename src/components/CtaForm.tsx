@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-
-const red = { color: "#DC2626" } as const;
+import { Button } from "./Button";
+import TextField from "./ui/TextField";
+import EmailField from "./ui/EmailField";
 
 export default function CtaForm() {
   const [form, setForm] = useState({
@@ -62,13 +63,13 @@ export default function CtaForm() {
 
   if (submitted) {
     return (
-      <div className="cta-form" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", minHeight: 280 }}>
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" style={{ marginBottom: 16 }}>
+      <div className="flex flex-col w-full items-center justify-center text-center min-h-[280px]">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" className="mb-4">
           <circle cx="12" cy="12" r="12" fill="#16A34A" />
           <polyline points="7.5 12.5 10.5 15.5 16.5 9.5" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-        <h3 style={{ fontSize: 20, fontWeight: 600, marginBottom: 6 }}>Demo requested!</h3>
-        <p style={{ fontSize: 15, color: "var(--color-muted)", maxWidth: "32ch" }}>
+        <h3 className="text-[20px] font-semibold mb-1.5">Demo requested!</h3>
+        <p className="text-[15px] text-[#5B6472] max-w-[32ch]">
           We&rsquo;ll be in touch within 24 hours to schedule your walkthrough.
         </p>
       </div>
@@ -76,107 +77,66 @@ export default function CtaForm() {
   }
 
   return (
-    <form className="cta-form" onSubmit={handleSubmit}>
-      <div className="cta-form-header">
-        <h3>Request a demo</h3>
-        <p>Tell us a little about your center and we&rsquo;ll be in touch.</p>
+    <form className="flex flex-col w-full" onSubmit={handleSubmit}>
+      <div className="mb-6">
+        <h3 className="text-[20px] font-semibold tracking-[-0.01em] mb-1">Request a demo</h3>
+        <p className="text-sm text-[#5B6472]">Tell us a little about your center and we&rsquo;ll be in touch.</p>
       </div>
 
-      {/* Name row */}
-      <div className="cta-field">
-        <div className="cta-form-row">
-          <div>
-            <label className="cta-label">Instructor first name <span style={red}>*</span></label>
-            <input
-              type="text"
-              placeholder="Maya"
-              required
-              value={form.firstName}
-              onChange={(e) => update("firstName", e.target.value)}
-              className="cta-input"
-            />
-          </div>
-          <div>
-            <label className="cta-label">Instructor last name <span style={red}>*</span></label>
-            <input
-              type="text"
-              placeholder="Rodriguez"
-              required
-              value={form.lastName}
-              onChange={(e) => update("lastName", e.target.value)}
-              className="cta-input"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Email */}
-      <div className="cta-field">
-        <label className="cta-label">Center email <span style={red}>*</span></label>
-        <div style={{ display: "flex", alignItems: "stretch" }}>
-          <input
-            type="text"
-            className="cta-input"
-            style={{ borderTopRightRadius: 0, borderBottomRightRadius: 0, borderRight: "none" }}
-            placeholder="maya"
+      <div className="mb-4">
+        <div className="grid grid-cols-2 gap-3.5 max-md:grid-cols-1">
+          <TextField
+            label="Instructor first name"
+            placeholder="Maya"
             required
-            value={form.emailUser}
-            onChange={(e) => update("emailUser", e.target.value)}
+            value={form.firstName}
+            onChange={(v) => update("firstName", v)}
+            className="!mb-0"
           />
-          <span
-            className="cta-input"
-            style={{
-              borderTopLeftRadius: 0,
-              borderBottomLeftRadius: 0,
-              background: "var(--color-bg)",
-              color: "var(--color-muted)",
-              whiteSpace: "nowrap",
-              userSelect: "none",
-              display: "flex",
-              alignItems: "center",
-              width: "auto",
-              flexShrink: 0,
-            }}
-          >
-            @ikumon.com
-          </span>
+          <TextField
+            label="Instructor last name"
+            placeholder="Rodriguez"
+            required
+            value={form.lastName}
+            onChange={(v) => update("lastName", v)}
+            className="!mb-0"
+          />
         </div>
       </div>
 
-      {/* Center name */}
-      <div className="cta-field">
-        <label className="cta-label">Center name <span style={red}>*</span></label>
-        <input
-          type="text"
-          placeholder="Kumon Carmel"
-          required
-          value={form.centerName}
-          onChange={(e) => update("centerName", e.target.value)}
-          className="cta-input"
-        />
-      </div>
+      <EmailField
+        label="Center email"
+        username={form.emailUser}
+        onUsernameChange={(v) => update("emailUser", v)}
+        domain="@ikumon.com"
+        required
+      />
 
-      {/* Phone */}
-      <div className="cta-field">
-        <label className="cta-label">Phone number <span style={red}>*</span></label>
-        <input
-          type="tel"
-          placeholder="(555) 123-4567"
-          required
-          value={form.phone}
-          onChange={(e) => update("phone", e.target.value)}
-          className="cta-input"
-        />
-      </div>
+      <TextField
+        label="Center name"
+        placeholder="Kumon Carmel"
+        required
+        value={form.centerName}
+        onChange={(v) => update("centerName", v)}
+      />
+
+      <TextField
+        label="Phone number"
+        placeholder="(555) 123-4567"
+        type="tel"
+        required
+        value={form.phone}
+        onChange={(v) => update("phone", v)}
+      />
 
       {error && (
-        <p style={{ fontSize: 13.5, color: "#DC2626", marginBottom: 8 }}>{error}</p>
+        <p className="text-[13.5px] text-[#DC2626] mb-2">{error}</p>
       )}
 
-      <button type="submit" className="btn btn-primary cta-submit" disabled={!filled || submitting}>
+      <Button type="submit" fullWidth className="mt-1 font-semibold py-3.5" disabled={!filled || submitting}>
         {submitting ? "Sending..." : "Request a demo"}
-      </button>
-      <p className="cta-fine">See it in action. Then try Presently free for 7 days.</p>
+      </Button>
+      <p className="text-center text-[13px] text-[#5B6472] mt-3">See it in action. Then try Presently free for 7 days.</p>
     </form>
   );
 }

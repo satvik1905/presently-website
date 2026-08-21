@@ -629,7 +629,7 @@ export default function FeaturesPage() {
         {/* Step Tracker HUD */}
         <div className="prezi-hud">
           <button
-            className="prezi-hud-btn"
+            className="w-9 h-9 grid place-items-center rounded-full border-none bg-transparent cursor-pointer text-[#475569] transition-[background,color] duration-150 hover:bg-[#f1f5f9] hover:text-[#0f172a]"
             onClick={prevStep}
             aria-label="Previous step"
           >
@@ -652,7 +652,7 @@ export default function FeaturesPage() {
           <span className="prezi-hud-label">{PATH[step].label}</span>
 
           <button
-            className="prezi-hud-btn"
+            className="w-9 h-9 grid place-items-center rounded-full border-none bg-transparent cursor-pointer text-[#475569] transition-[background,color] duration-150 hover:bg-[#f1f5f9] hover:text-[#0f172a]"
             onClick={nextStep}
             aria-label="Next step"
           >
@@ -674,7 +674,7 @@ export default function FeaturesPage() {
 
           <div className="prezi-hud-divider" />
 
-          <button className="prezi-hud-reset" onClick={resetOverview}>
+          <button className="text-xs font-bold text-[#475569] bg-transparent border-none cursor-pointer py-1 px-2 transition-colors duration-150 whitespace-nowrap hover:text-blue" onClick={resetOverview}>
             Reset Overview
           </button>
         </div>
@@ -693,7 +693,7 @@ export default function FeaturesPage() {
               {MODULES.map((m, i) => (
                 <div className="fmobile-item" key={i}>
                   <button
-                    className="fmobile-trigger"
+                    className="w-full flex items-center justify-between gap-4 py-5 bg-transparent border-none cursor-pointer font-[inherit] text-[17px] font-semibold text-ink text-left focus-visible:outline-2 focus-visible:outline-blue focus-visible:outline-offset-2 focus-visible:rounded"
                     onClick={() => setMobileOpen(mobileOpen === i ? null : i)}
                     aria-expanded={mobileOpen === i}
                   >

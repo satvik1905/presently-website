@@ -10,6 +10,7 @@ export default function Home() {
     <>
       <div className="hero-viewport">
         <Navbar
+          variant="home"
           links={[
             { label: "How it works", href: "#how" },
             { label: "Features", href: "/features" },

@@ -1,3 +1,4 @@
+import { LinkButton } from "./Button";
 import HeroCarousel from "./HeroCarousel";
 
 export default function Hero() {
@@ -15,12 +16,8 @@ export default function Hero() {
             your team always knows who&rsquo;s here and who&rsquo;s ready.
           </p>
           <div className="hero-ctas">
-            <a className="btn btn-primary btn-lg" href="/partner">
-              Get Powered
-            </a>
-            <a className="btn btn-ghost btn-lg" href="#demo">
-              Request a demo
-            </a>
+            <LinkButton href="/partner" size="lg">Get Powered</LinkButton>
+            <LinkButton href="#demo" variant="ghost" size="lg">Request a demo</LinkButton>
           </div>
           <p className="hero-note">
             Web-based. Works on the iPad at your front desk. No new hardware.

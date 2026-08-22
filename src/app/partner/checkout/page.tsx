@@ -14,12 +14,12 @@ import FieldError from "@/components/ui/FieldError";
 const PLANS = {
   standard: {
     name: "Standard",
-    priceId: "price_1U5tF9CpyCkFlcV6XhvH9EQU",
+    priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_STANDARD!,
     price: 34.99,
   },
   pro: {
     name: "Pro",
-    priceId: "price_1U5tI9CpyCkFlcV6HNNhPzUc",
+    priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_PREMIUM!,
     price: 39.99,
   },
 } as const;

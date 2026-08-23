@@ -9,7 +9,7 @@ const ITEMS = [
   },
   {
     q: "What happens after the pilot?",
-    a: "Your pilot pricing stays locked. When we launch publicly, new centers will pay more. You keep your rate.",
+    a: "Pilot centers receive special pricing via promo code during the pilot period. After the pilot ends, centers default to regular pricing. No surprises — we'll let you know before anything changes.",
   },
   {
     q: "Do I need to install anything?",

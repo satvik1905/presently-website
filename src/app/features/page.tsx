@@ -4,6 +4,7 @@ import {
   useState,
   useEffect,
   useCallback,
+  useRef,
   Fragment,
   type ComponentType,
 } from "react";
@@ -453,10 +454,12 @@ export default function FeaturesPage() {
   const [vp, setVp] = useState({ w: 1440, h: 832 });
   const [ready, setReady] = useState(false);
   const [mobileOpen, setMobileOpen] = useState<number | null>(null);
+  const [dragging, setDragging] = useState(false);
+  const dragStart = useRef<{ x: number; y: number; cx: number; cy: number } | null>(null);
 
   useEffect(() => {
     const update = () =>
-      setVp({ w: window.innerWidth, h: window.innerHeight - 68 });
+      setVp({ w: window.innerWidth, h: window.innerHeight - 68 - 72 });
     update();
     setReady(true);
     window.addEventListener("resize", update);
@@ -504,6 +507,38 @@ export default function FeaturesPage() {
     return () => window.removeEventListener("keydown", onKey);
   }, [nextStep, prevStep, resetOverview]);
 
+  function handlePointerDown(e: React.PointerEvent) {
+    if (e.button !== 0) return;
+    dragStart.current = { x: e.clientX, y: e.clientY, cx: zoom.x, cy: zoom.y };
+    setDragging(true);
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+  }
+
+  function handlePointerMove(e: React.PointerEvent) {
+    if (!dragStart.current || !dragging) return;
+    const dx = (e.clientX - dragStart.current.x) / zoom.scale;
+    const dy = (e.clientY - dragStart.current.y) / zoom.scale;
+    setZoom((prev) => ({
+      ...prev,
+      x: dragStart.current!.cx - dx,
+      y: dragStart.current!.cy - dy,
+    }));
+  }
+
+  function handlePointerUp() {
+    dragStart.current = null;
+    setDragging(false);
+  }
+
+  function handleWheel(e: React.WheelEvent) {
+    e.preventDefault();
+    const factor = e.deltaY > 0 ? 0.9 : 1.1;
+    setZoom((prev) => ({
+      ...prev,
+      scale: Math.min(2.5, Math.max(0.2, prev.scale * factor)),
+    }));
+  }
+
   const tx = vp.w / 2 - zoom.x * zoom.scale;
   const ty = vp.h / 2 - zoom.y * zoom.scale;
   const worldTransform = `translate3d(${tx}px, ${ty}px, 0) scale(${zoom.scale})`;
@@ -512,18 +547,27 @@ export default function FeaturesPage() {
     <>
       <Navbar
         links={[
-          { label: "Home", href: "/" },
-          { label: "Partner", href: "/partner" },
+          { label: "How it works", href: "/#how" },
+          { label: "Features", href: "/features" },
+          { label: "Demo", href: "/#demo" },
         ]}
       />
 
       {/* ── Desktop Prezi Canvas ── */}
-      <div className="prezi-viewport">
+      <div
+        className="prezi-viewport"
+        style={{ cursor: dragging ? "grabbing" : "grab" }}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerLeave={handlePointerUp}
+      >
         <div
           className="prezi-world"
           style={{
             transform: ready ? worldTransform : undefined,
             opacity: ready ? 1 : 0,
+            transition: dragging ? "none" : undefined,
           }}
         >
           {/* SVG Connectors */}
@@ -679,6 +723,8 @@ export default function FeaturesPage() {
           </button>
         </div>
       </div>
+
+      <Footer />
 
       {/* ── Mobile Accordion ── */}
       <div className="feat-mobile">

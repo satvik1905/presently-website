@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="site-footer">
-      <div className="wrap footer-main">
+      <div className="wrap !px-0 footer-main">
         <div className="footer-brand">
           <a className="footer-wordmark" href="/">
             <img
@@ -35,7 +35,7 @@ export default function Footer() {
       </div>
 
       <div className="footer-bar">
-        <div className="wrap footer-bar-inner">
+        <div className="wrap !px-0 footer-bar-inner">
           <span>&copy; 2026 Presently. All rights reserved.</span>
         </div>
       </div>

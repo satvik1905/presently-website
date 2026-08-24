@@ -99,6 +99,8 @@ export async function POST(req: Request) {
       discountName: promoCode.code,
       amountOff: coupon.amount_off,
       percentOff: coupon.percent_off,
+      duration: coupon.duration,
+      durationInMonths: coupon.duration_in_months,
       spotsLeft,
       totalSpots: promoCode.max_redemptions,
     });

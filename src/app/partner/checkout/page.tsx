@@ -31,6 +31,8 @@ interface PromoResult {
   discountName: string;
   amountOff: number | null;
   percentOff: number | null;
+  duration: "forever" | "once" | "repeating";
+  durationInMonths: number | null;
   spotsLeft: number | null;
   totalSpots: number | null;
 }
@@ -113,6 +115,8 @@ function CheckoutForm() {
           discountName: data.discountName,
           amountOff: data.amountOff,
           percentOff: data.percentOff,
+          duration: data.duration,
+          durationInMonths: data.durationInMonths,
           spotsLeft: data.spotsLeft,
           totalSpots: data.totalSpots,
         });
@@ -193,7 +197,7 @@ function CheckoutForm() {
   if (!plan || !planKey) {
     return (
       <>
-        <Navbar links={[{ label: "Home", href: "/" }, { label: "Plans", href: "/partner" }]} />
+        <Navbar links={[{ label: "How it works", href: "/#how" }, { label: "Features", href: "/features" }, { label: "Demo", href: "/#demo" }]} />
         <main>
           <section className="partner-hero">
             <div className="wrap">
@@ -374,9 +378,6 @@ function CheckoutForm() {
 
                 <div
                   style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "baseline",
                     borderTop: "1px solid var(--color-line)",
                     paddingTop: 16,
                     marginTop: 8,
@@ -384,10 +385,40 @@ function CheckoutForm() {
                     fontSize: 15,
                   }}
                 >
-                  <span style={{ color: "var(--color-muted)", fontSize: 18, fontWeight: 600 }}>Due today</span>
-                  <span style={{ fontWeight: 700, fontSize: 22 }}>
-                    ${(finalPrice ?? plan.price).toFixed(2)}/mo
-                  </span>
+                  {promo && finalPrice !== null ? (
+                    <>
+                      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8, color: "var(--color-muted)" }}>
+                        <span>{plan.name} plan</span>
+                        <span>${plan.price.toFixed(2)}/mo</span>
+                      </div>
+                      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 12, color: "#16A34A" }}>
+                        <span>Pilot discount ({promo.discountName})</span>
+                        <span>
+                          {promo.amountOff
+                            ? `-$${(promo.amountOff / 100).toFixed(2)}`
+                            : `-${promo.percentOff}%`}
+                        </span>
+                      </div>
+                      <div style={{ borderTop: "1px solid var(--color-line)", paddingTop: 12, display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                        <span style={{ fontSize: 18, fontWeight: 600 }}>Due today</span>
+                        <span style={{ fontWeight: 700, fontSize: 22 }}>${finalPrice.toFixed(2)}/mo</span>
+                      </div>
+                      <p style={{ fontSize: 12, color: "var(--color-muted)", marginTop: 8 }}>
+                        {promo.duration === "forever"
+                          ? "Discount applies for the life of your subscription."
+                          : promo.duration === "once"
+                            ? `Discount applies to your first month. Then $${plan.price.toFixed(2)}/mo.`
+                            : promo.durationInMonths
+                              ? `Discount applies for ${promo.durationInMonths} months. Then $${plan.price.toFixed(2)}/mo.`
+                              : `Then $${plan.price.toFixed(2)}/mo.`}
+                      </p>
+                    </>
+                  ) : (
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                      <span style={{ color: "var(--color-muted)", fontSize: 18, fontWeight: 600 }}>Due today</span>
+                      <span style={{ fontWeight: 700, fontSize: 22 }}>${plan.price.toFixed(2)}/mo</span>
+                    </div>
+                  )}
                 </div>
 
                 <Button

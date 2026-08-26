@@ -8,7 +8,6 @@ import Footer from "@/components/Footer";
 import AddressAutocomplete, { type AddressParts } from "@/components/AddressAutocomplete";
 import { Button } from "@/components/Button";
 import TextField from "@/components/ui/TextField";
-import EmailField from "@/components/ui/EmailField";
 import FieldError from "@/components/ui/FieldError";
 
 const PLANS = {
@@ -56,7 +55,7 @@ function CheckoutForm() {
     locationDisplay: "",
     firstName: "",
     lastName: "",
-    emailUser: "",
+    email: "",
     code: "",
   });
   const [addressParts, setAddressParts] = useState({
@@ -144,7 +143,7 @@ function CheckoutForm() {
     form.centerName.trim() &&
     form.firstName.trim() &&
     form.lastName.trim() &&
-    form.emailUser.trim() &&
+    form.email.trim() &&
     form.locationDisplay.trim();
 
   async function handleSubmit(e: FormEvent) {
@@ -161,7 +160,7 @@ function CheckoutForm() {
         body: JSON.stringify({
           priceId: PLANS[planKey].priceId,
           promotionCodeId: promo?.promotionCodeId || null,
-          customerEmail: `${form.emailUser.trim()}@ikumon.com`,
+          customerEmail: form.email.trim(),
           centerName: form.centerName.trim(),
           customerName: `${form.firstName.trim()} ${form.lastName.trim()}`,
           center_address: form.locationDisplay.trim(),
@@ -290,12 +289,13 @@ function CheckoutForm() {
                   />
                 </div>
 
-                <EmailField
+                <TextField
                   label="Work email"
-                  username={form.emailUser}
-                  onUsernameChange={(v) => update("emailUser", v)}
-                  domain="@ikumon.com"
+                  placeholder="maya@example.com"
+                  type="email"
                   required
+                  value={form.email}
+                  onChange={(v) => update("email", v)}
                 />
 
                 {/* Promo code */}

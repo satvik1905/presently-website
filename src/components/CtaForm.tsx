@@ -3,13 +3,11 @@
 import { useState } from "react";
 import { Button } from "./Button";
 import TextField from "./ui/TextField";
-import EmailField from "./ui/EmailField";
-
 export default function CtaForm() {
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
-    emailUser: "",
+    email: "",
     centerName: "",
     phone: "",
   });
@@ -20,7 +18,7 @@ export default function CtaForm() {
   const filled =
     form.firstName.trim() &&
     form.lastName.trim() &&
-    form.emailUser.trim() &&
+    form.email.trim() &&
     form.centerName.trim() &&
     form.phone.trim();
 
@@ -42,7 +40,7 @@ export default function CtaForm() {
         body: JSON.stringify({
           firstName: form.firstName.trim(),
           lastName: form.lastName.trim(),
-          email: `${form.emailUser.trim()}@ikumon.com`,
+          email: form.email.trim(),
           centerName: form.centerName.trim(),
           phone: form.phone.trim(),
         }),
@@ -104,12 +102,13 @@ export default function CtaForm() {
         </div>
       </div>
 
-      <EmailField
+      <TextField
         label="Center email"
-        username={form.emailUser}
-        onUsernameChange={(v) => update("emailUser", v)}
-        domain="@ikumon.com"
+        placeholder="maya@example.com"
+        type="email"
         required
+        value={form.email}
+        onChange={(v) => update("email", v)}
       />
 
       <TextField

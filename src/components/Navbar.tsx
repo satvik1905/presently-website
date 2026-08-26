@@ -48,6 +48,12 @@ export default function Navbar({ links, variant = "default" }: NavbarProps) {
                   {link.label}
                 </a>
               ))}
+              <a
+                href="https://portal.presently.now/"
+                className="hover:text-[#101828] transition-colors"
+              >
+                Login to portal
+              </a>
             </nav>
           )}
           <LinkButton href="/partner">Get Powered</LinkButton>

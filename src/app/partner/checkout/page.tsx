@@ -196,7 +196,7 @@ function CheckoutForm() {
   if (!plan || !planKey) {
     return (
       <>
-        <Navbar links={[{ label: "How it works", href: "/#how" }, { label: "Features", href: "/features" }, { label: "Demo", href: "/#demo" }]} />
+        <Navbar links={[{ label: "How it works", href: "/#how" }, { label: "Demo", href: "/#demo" }]} />
         <main>
           <section className="partner-hero">
             <div className="wrap">

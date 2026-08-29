@@ -548,7 +548,6 @@ export default function FeaturesPage() {
       <Navbar
         links={[
           { label: "How it works", href: "/#how" },
-          { label: "Features", href: "/features" },
           { label: "Demo", href: "/#demo" },
         ]}
       />

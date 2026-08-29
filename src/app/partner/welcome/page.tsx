@@ -34,7 +34,7 @@ export default async function WelcomePage(props: PageProps<"/partner/welcome">) 
 
   return (
     <>
-      <Navbar links={[{ label: "How it works", href: "/#how" }, { label: "Features", href: "/features" }, { label: "Demo", href: "/#demo" }]} />
+      <Navbar links={[{ label: "How it works", href: "/#how" }, { label: "Demo", href: "/#demo" }]} />
       <main>
         <section className="welcome-hero">
           <div className="wrap">

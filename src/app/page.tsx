@@ -13,7 +13,6 @@ export default function Home() {
           variant="home"
           links={[
             { label: "How it works", href: "#how" },
-            { label: "Features", href: "/features" },
             { label: "Demo", href: "#demo" },
           ]}
         />

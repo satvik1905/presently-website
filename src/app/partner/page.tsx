@@ -39,7 +39,7 @@ const PLANS = [
 export default function PartnerPage() {
   return (
     <>
-      <Navbar links={[{ label: "How it works", href: "/#how" }, { label: "Demo", href: "/#demo" }]} />
+      <Navbar links={[{ label: "How it works", href: "/#how" }, { label: "See it in action", href: "/see-it-in-action" }, { label: "Demo", href: "/#demo" }]} />
       <main>
         {/* Hero */}
         <section className="partner-hero">

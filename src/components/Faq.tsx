@@ -25,20 +25,25 @@ export default function Faq() {
   }
 
   return (
-    <section className="partner-faq">
+    <section className="py-14 pb-16">
       <div className="wrap">
-        <div className="faq-list">
-          <h2>Questions</h2>
+        <div className="max-w-[800px] mx-auto">
+          <h2 className="font-semibold text-[24px] tracking-[-0.01em] mb-8">
+            Questions
+          </h2>
           {ITEMS.map((item, i) => (
-            <div key={i} className="faq-item">
+            <div
+              key={i}
+              className="border-t border-[#E7E5DF] last:border-b last:border-[#E7E5DF]"
+            >
               <button
-                className="faq-trigger"
+                className="w-full flex items-center justify-between gap-4 py-5 bg-transparent border-none cursor-pointer text-left font-[inherit] text-[17px] font-semibold tracking-[-0.01em] text-[#101828] focus-visible:outline-2 focus-visible:outline-[#2563EB] focus-visible:outline-offset-2 focus-visible:rounded"
                 onClick={() => toggle(i)}
                 aria-expanded={open === i}
               >
                 <span>{item.q}</span>
                 <svg
-                  className={`faq-icon${open === i ? " faq-icon-open" : ""}`}
+                  className={`shrink-0 text-[#5B6472] transition-transform duration-200 ${open === i ? "rotate-45" : ""}`}
                   width="18"
                   height="18"
                   viewBox="0 0 24 24"
@@ -53,9 +58,17 @@ export default function Faq() {
                 </svg>
               </button>
               <div
-                className={`faq-answer${open === i ? " faq-answer-open" : ""}`}
+                className={`grid transition-[grid-template-rows] duration-[250ms] ease-out ${
+                  open === i ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                }`}
               >
-                <p>{item.a}</p>
+                <p
+                  className={`overflow-hidden text-[15px] text-[#5B6472] m-0 ${
+                    open === i ? "pb-5" : "pb-0"
+                  }`}
+                >
+                  {item.a}
+                </p>
               </div>
             </div>
           ))}

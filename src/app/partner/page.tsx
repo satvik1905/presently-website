@@ -42,26 +42,30 @@ export default function PartnerPage() {
       <Navbar links={[{ label: "How it works", href: "/#how" }, { label: "See it in action", href: "/see-it-in-action" }, { label: "Demo", href: "/#demo" }]} />
       <main>
         {/* Hero */}
-        <section className="partner-hero">
+        <section className="pt-[100px] pb-6 text-center">
           <div className="wrap">
-            <h2>Choose your plan</h2>
-            <p className="sub">
+            <h2 className="font-semibold text-[clamp(26px,3vw,36px)] leading-[1.15] tracking-[-0.02em] mx-auto mb-2 !max-w-none">
+              Choose your plan
+            </h2>
+            <p className="text-[16px] text-[#5B6472] mx-auto">
               Start with Standard or unlock everything with Pro.
             </p>
           </div>
         </section>
 
         {/* Plan Picker */}
-        <section className="partner-plans">
+        <section className="!pt-4 !pb-0">
           <div className="wrap">
-            <div className="plan-grid">
+            <div className="grid grid-cols-2 gap-5 max-w-[800px] mx-auto max-[800px]:grid-cols-1">
               {PLANS.map((p) => (
                 <div
                   key={p.key}
-                  className={`plan-card${p.isPro ? " plan-card-pro" : ""}`}
+                  className={`relative bg-white border border-[#E7E5DF] rounded-[14px] p-6 flex flex-col hover:border-[#C9C6BE] transition-colors ${
+                    p.isPro ? "border-t-2 border-t-[#2563EB]" : ""
+                  }`}
                 >
                   <div className="flex items-start justify-between mb-3.5">
-                    <div className="plan-icon" style={{ marginBottom: 0 }}>
+                    <div className="w-10 h-10 rounded-[10px] bg-[#EEF3FE] flex items-center justify-center">
                       {p.isPro ? (
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                           <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
@@ -74,18 +78,20 @@ export default function PartnerPage() {
                       )}
                     </div>
                     {p.isPro && (
-                      <span className="plan-badge" style={{ position: "static" }}>Recommended</span>
+                      <span className="text-[12px] font-medium text-[#2563EB] bg-[#EEF3FE] px-2.5 py-[3px] rounded-full tracking-[0.01em]">
+                        Recommended
+                      </span>
                     )}
                   </div>
 
-                  <h3>{p.name}</h3>
-                  <p className="plan-desc">{p.description}</p>
+                  <h3 className="text-[19px] font-semibold tracking-[-0.01em] mb-1">{p.name}</h3>
+                  <p className="text-[14px] text-[#5B6472] mb-4">{p.description}</p>
 
-                  <div className="plan-price">
-                    <span className="plan-price-new">
+                  <div className="flex items-baseline gap-1.5 mb-4">
+                    <span className="text-[34px] font-bold tracking-[-0.025em]">
                       ${p.price.toFixed(2)}
                     </span>
-                    <span className="plan-price-period">/month</span>
+                    <span className="text-[15px] text-[#5B6472]">/month</span>
                   </div>
 
                   <LinkButton
@@ -97,10 +103,11 @@ export default function PartnerPage() {
                     {p.cta}
                   </LinkButton>
 
-                  <ul className="plan-features">
+                  <ul className="list-none flex flex-col gap-2.5 border-t border-[#E7E5DF] pt-4">
                     {p.features.map((f, fi) => (
-                      <li key={f}>
+                      <li key={f} className="flex items-center gap-2.5 text-[14.5px]">
                         <svg
+                          className="shrink-0"
                           width="15"
                           height="15"
                           viewBox="0 0 24 24"
@@ -119,7 +126,7 @@ export default function PartnerPage() {
                 </div>
               ))}
             </div>
-            <p className="plan-footnote">
+            <p className="text-center text-[14px] text-[#5B6472] mt-5">
               No contracts. Cancel anytime. Special pilot pricing available via promo code.
             </p>
           </div>

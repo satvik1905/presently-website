@@ -36,10 +36,11 @@ export default async function WelcomePage(props: PageProps<"/partner/welcome">) 
     <>
       <Navbar links={[{ label: "How it works", href: "/#how" }, { label: "See it in action", href: "/see-it-in-action" }, { label: "Demo", href: "/#demo" }]} />
       <main>
-        <section className="welcome-hero">
+        <section className="py-40 flex items-center justify-center">
           <div className="wrap">
-            <div className="welcome-card">
+            <div className="text-center max-w-[480px] mx-auto">
               <svg
+                className="mx-auto mb-5"
                 width="48"
                 height="48"
                 viewBox="0 0 24 24"
@@ -52,8 +53,10 @@ export default async function WelcomePage(props: PageProps<"/partner/welcome">) 
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
                 <polyline points="22 4 12 14.01 9 11.01" />
               </svg>
-              <h1>You&rsquo;re in{customerName ? `, ${customerName}` : ""}.</h1>
-              <p>
+              <h1 className="font-semibold text-[40px] tracking-[-0.025em] mb-3">
+                You&rsquo;re in{customerName ? `, ${customerName}` : ""}.
+              </h1>
+              <p className="text-[17px] text-[#5B6472] mb-8">
                 {centerName ? (
                   <>
                     Welcome to the Presently pilot for{" "}

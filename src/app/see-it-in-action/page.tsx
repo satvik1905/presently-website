@@ -112,6 +112,7 @@ export default function SeeItInActionPage() {
   return (
     <>
       <Navbar
+        variant="home"
         links={[
           { label: "How it works", href: "/#how" },
           { label: "See it in action", href: "/see-it-in-action" },

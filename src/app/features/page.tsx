@@ -729,9 +729,11 @@ export default function FeaturesPage() {
       {/* ── Mobile Accordion ── */}
       <div className="feat-mobile">
         <main>
-          <section className="partner-hero">
+          <section className="pt-[100px] pb-6 text-center">
             <div className="wrap">
-              <h2>Everything Presently does</h2>
+              <h2 className="font-semibold text-[clamp(26px,3vw,36px)] leading-[1.15] tracking-[-0.02em] mx-auto mb-2">
+                Everything Presently does
+              </h2>
             </div>
           </section>
           <div className="wrap">
@@ -753,7 +755,7 @@ export default function FeaturesPage() {
                       <span>{m.title}</span>
                     </div>
                     <svg
-                      className={`faq-icon${mobileOpen === i ? " faq-icon-open" : ""}`}
+                      className={`shrink-0 text-[#5B6472] transition-transform duration-200 ${mobileOpen === i ? "rotate-45" : ""}`}
                       width="18"
                       height="18"
                       viewBox="0 0 24 24"

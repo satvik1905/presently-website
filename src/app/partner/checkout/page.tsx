@@ -198,10 +198,12 @@ function CheckoutForm() {
       <>
         <Navbar links={[{ label: "How it works", href: "/#how" }, { label: "Demo", href: "/#demo" }]} />
         <main>
-          <section className="partner-hero">
+          <section className="pt-[100px] pb-6 text-center">
             <div className="wrap">
-              <h2>No plan selected</h2>
-              <p className="sub">
+              <h2 className="font-semibold text-[clamp(26px,3vw,36px)] leading-[1.15] tracking-[-0.02em] mx-auto mb-2">
+                No plan selected
+              </h2>
+              <p className="text-[16px] text-[#5B6472] mx-auto">
                 <Link href="/partner">Go back and choose a plan.</Link>
               </p>
             </div>
@@ -218,11 +220,11 @@ function CheckoutForm() {
     <>
       <Navbar links={[{ label: "Home", href: "/" }, { label: "Plans", href: "/partner" }]} />
       <main>
-        <section className="partner-checkout-page">
+        <section className="pt-[120px] pb-[88px]">
           <div className="wrap">
-            <div className="checkout-container">
+            <div className="bg-white border border-[#E7E5DF] rounded-2xl p-[36px_32px] max-w-[560px] mx-auto max-[800px]:max-w-full">
               {/* Summary bar */}
-              <div className="checkout-summary">
+              <div className="flex items-center justify-between p-[14px_18px] bg-[#FAFAF7] rounded-lg mb-6 text-[15px]">
                 <span>
                   {plan.name}
                   {" \u2014 "}
@@ -235,7 +237,7 @@ function CheckoutForm() {
                     <strong>${plan.price.toFixed(2)}/mo</strong>
                   )}
                 </span>
-                <Link href="/partner" className="checkout-change">
+                <Link href="/partner" className="text-[#2563EB] text-[14px] font-medium hover:underline">
                   Change plan
                 </Link>
               </div>
@@ -369,7 +371,7 @@ function CheckoutForm() {
                         onClick={() => validateCode()}
                         disabled={!form.code.trim() || codeLoading}
                       >
-                        {codeLoading ? <span className="spinner" /> : "Apply"}
+                        {codeLoading ? <span className="inline-block w-4 h-4 border-2 border-[#E7E5DF] border-t-[#2563EB] rounded-full animate-spin" /> : "Apply"}
                       </Button>
                     </div>
                   )}

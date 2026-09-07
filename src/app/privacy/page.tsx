@@ -26,8 +26,7 @@ const sections = [
 const p = "text-[17px] leading-[1.7] text-slate-700 mb-4";
 const h2 =
   "text-[24px] font-semibold text-slate-900 tracking-[-0.01em] mb-4 scroll-mt-24";
-const link =
-  "text-[#2563EB] underline underline-offset-2 hover:text-[#1D4ED8]";
+const link = "text-[#2563EB] underline underline-offset-2 hover:text-[#1D4ED8]";
 const ul =
   "text-[17px] leading-[1.7] text-slate-700 mb-4 ml-6 list-disc space-y-1";
 const sec = "mt-14";
@@ -49,14 +48,13 @@ export default function PrivacyPage() {
         <p className={p}>
           Presently LLC (&ldquo;Presently,&rdquo; &ldquo;we,&rdquo;
           &ldquo;us,&rdquo; or &ldquo;our&rdquo;) provides student check-in
-          software to learning centers. Our mailing address is 3850 Rio Rd
-          Apt 21, Carmel, CA 93923.
+          software to learning centers.
         </p>
         <p className={p}>
           The learning center collects and controls the student and guardian
           information; Presently processes it on the center&rsquo;s
-          instructions. Presently is a data processor — each center is the
-          data controller responsible for the information it provides to us.
+          instructions. Presently is a data processor — each center is the data
+          controller responsible for the information it provides to us.
         </p>
         <p className={p}>
           Guardians&rsquo; requests to access, correct, or delete a
@@ -76,12 +74,10 @@ export default function PrivacyPage() {
             <strong className="text-slate-900">+1 (831) 298-8368</strong>.
           </li>
           <li>
-
-            Message frequency: messages are sent only when a student checks
-            in or checks out — typically up to 2 messages per student on
-            each day the student attends. Attendance days are set by each
-            center. Guardians with more than one enrolled student receive
-            more.
+            Message frequency: messages are sent only when a student checks in
+            or checks out — typically up to 2 messages per student on each day
+            the student attends. Attendance days are set by each center.
+            Guardians with more than one enrolled student receive more.
           </li>
           <li>Message and data rates may apply.</li>
           <li>Reply STOP to opt out, HELP for help.</li>
@@ -102,8 +98,8 @@ export default function PrivacyPage() {
           3. Information we process
         </h2>
         <p className={p}>
-          The categories below describe the information learning centers
-          provide to Presently or that the service generates during use.
+          The categories below describe the information learning centers provide
+          to Presently or that the service generates during use.
         </p>
 
         <p className={`${p} font-semibold text-slate-900`}>Student</p>
@@ -127,8 +123,8 @@ export default function PrivacyPage() {
 
         <p className={`${p} font-semibold text-slate-900`}>Attendance</p>
         <p className={p}>
-          Check-in and check-out times, room, time-limit and added-time
-          actions, who performed each action and whether by scan or manually.
+          Check-in and check-out times, room, time-limit and added-time actions,
+          who performed each action and whether by scan or manually.
         </p>
 
         <p className={`${p} font-semibold text-slate-900`}>Messages</p>
@@ -157,9 +153,9 @@ export default function PrivacyPage() {
           barcode or QR code. No images are captured, stored, or transmitted.
         </p>
         <p className={p}>
-          The kiosk screen shows a short list of recent check-ins so staff
-          can confirm a scan registered. This list may be visible to others
-          nearby in the center.
+          The kiosk screen shows a short list of recent check-ins so staff can
+          confirm a scan registered. This list may be visible to others nearby
+          in the center.
         </p>
       </section>
 
@@ -196,9 +192,7 @@ export default function PrivacyPage() {
                 <th className="px-4 py-3 border-b border-slate-200">
                   Provider
                 </th>
-                <th className="px-4 py-3 border-b border-slate-200">
-                  Purpose
-                </th>
+                <th className="px-4 py-3 border-b border-slate-200">Purpose</th>
                 <th className="px-4 py-3 border-b border-slate-200">
                   Information involved
                 </th>
@@ -206,27 +200,21 @@ export default function PrivacyPage() {
             </thead>
             <tbody>
               <tr className="border-b border-slate-200">
-                <td className="px-4 py-3 font-medium text-slate-900">
-                  Twilio
-                </td>
+                <td className="px-4 py-3 font-medium text-slate-900">Twilio</td>
                 <td className="px-4 py-3">Text message delivery</td>
                 <td className="px-4 py-3">
                   Mobile numbers and message content
                 </td>
               </tr>
               <tr className="border-b border-slate-200">
-                <td className="px-4 py-3 font-medium text-slate-900">
-                  Stripe
-                </td>
+                <td className="px-4 py-3 font-medium text-slate-900">Stripe</td>
                 <td className="px-4 py-3">Subscription payments</td>
                 <td className="px-4 py-3">
                   Center billing contact and payment details
                 </td>
               </tr>
               <tr className="border-b border-slate-200">
-                <td className="px-4 py-3 font-medium text-slate-900">
-                  Vercel
-                </td>
+                <td className="px-4 py-3 font-medium text-slate-900">Vercel</td>
                 <td className="px-4 py-3">Hosting</td>
                 <td className="px-4 py-3">
                   Application traffic and request metadata
@@ -276,10 +264,10 @@ export default function PrivacyPage() {
           8. Cookies and analytics
         </h2>
         <p className={p}>
-          We use cookies only where they are necessary to run the service.
-          When center staff sign in to Presently, we set a session cookie so
-          you stay signed in. We do not use advertising or tracking cookies,
-          and we do not allow third parties to track you across other sites.
+          We use cookies only where they are necessary to run the service. When
+          center staff sign in to Presently, we set a session cookie so you stay
+          signed in. We do not use advertising or tracking cookies, and we do
+          not allow third parties to track you across other sites.
         </p>
       </section>
 
@@ -293,9 +281,9 @@ export default function PrivacyPage() {
           retained for 7 years after the student becomes inactive.
         </p>
         <p className={p}>
-          If a center&rsquo;s subscription ends, the center may export its
-          data for 30 days, after which we delete it, except where we are
-          required to retain records for longer.
+          If a center&rsquo;s subscription ends, the center may export its data
+          for 30 days, after which we delete it, except where we are required to
+          retain records for longer.
         </p>
       </section>
 
@@ -317,8 +305,8 @@ export default function PrivacyPage() {
           11. California residents
         </h2>
         <p className={p}>
-          If we become aware of a breach of unencrypted personal information,
-          we will notify affected individuals consistent with California law.
+          If we become aware of a breach of unencrypted personal information, we
+          will notify affected individuals consistent with California law.
         </p>
         <p className={p}>
           Requests relating to a student&rsquo;s information should be directed

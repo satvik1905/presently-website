@@ -1,6 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import { motion } from "framer-motion";
+import { useStepActive } from "@/lib/step-context";
+
+const springTight = [0.34, 1.2, 0.64, 1] as const;
 
 function fmt(s: number) {
   const m = Math.floor(s / 60);
@@ -13,11 +17,12 @@ const JONAH_START = 1798;
 const JONAH_LIMIT = 1800;
 
 export default function VigBoard() {
+  const active = useStepActive();
+  const v = active ? "visible" : "hidden";
   const [sofiaTime, setSofiaTime] = useState(SOFIA_START);
   const [jonahTime, setJonahTime] = useState(JONAH_START);
   const [jonahOver, setJonahOver] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const vigRef = useRef<HTMLDivElement>(null);
 
   const startTimer = useCallback(() => {
     if (intervalRef.current) clearInterval(intervalRef.current);
@@ -39,50 +44,107 @@ export default function VigBoard() {
     intervalRef.current = null;
   }, []);
 
-  // Watch for parent .step toggling "in" class
   useEffect(() => {
-    const vig = vigRef.current;
-    if (!vig) return;
-    const step = vig.closest(".step");
-    if (!step) return;
-
-    const obs = new MutationObserver(() => {
-      if (step.classList.contains("in")) {
-        startTimer();
-      } else {
-        stopTimer();
-      }
-    });
-
-    obs.observe(step, { attributes: true, attributeFilter: ["class"] });
-    return () => {
-      obs.disconnect();
+    if (active) {
+      startTimer();
+    } else {
       stopTimer();
-    };
-  }, [startTimer, stopTimer]);
+    }
+    return stopTimer;
+  }, [active, startTimer, stopTimer]);
 
   return (
-    <div ref={vigRef} className="vig vig-board" aria-hidden="true">
-      <div className="room-h">
+    <div
+      className="relative h-[196px] overflow-hidden rounded-2xl border border-[#DCE5F5] mb-[22px] pt-3.5 px-3"
+      style={{
+        background:
+          "linear-gradient(135deg, #EEF3FE 0%, #E0EAFF 50%, #D6E2FF 100%)",
+      }}
+      aria-hidden="true"
+    >
+      {/* Room header */}
+      <motion.div
+        className="flex justify-between items-baseline text-[12px] tracking-[0.08em] uppercase text-[#5B6472] font-medium mb-2 px-0.5"
+        initial="hidden"
+        animate={v}
+        variants={{
+          hidden: { opacity: 0, y: 6 },
+          visible: { opacity: 1, y: 0 },
+        }}
+        transition={{
+          y: { duration: 0.45, delay: 0.1, ease: "easeOut" },
+          opacity: { duration: 0.4, delay: 0.1, ease: "easeOut" },
+        }}
+      >
         <span>Main Room</span>
-        <span className="n">2</span>
-      </div>
-      <div className="kid ok">
+        <span className="tracking-normal tabular-nums">2</span>
+      </motion.div>
+
+      {/* Sofia card */}
+      <motion.div
+        className="flex justify-between items-center p-[9px_10px] rounded-lg bg-white border border-[#E7E5DF] text-[14px]"
+        initial="hidden"
+        animate={v}
+        variants={{
+          hidden: { opacity: 0, x: -14 },
+          visible: { opacity: 1, x: 0 },
+        }}
+        transition={{
+          x: {
+            duration: 0.55,
+            delay: 0.35,
+            ease: springTight,
+          },
+          opacity: { duration: 0.4, delay: 0.35, ease: "easeOut" },
+        }}
+      >
         <span>
-          <span className="name">Sofia L.</span>
-          <span className="sub">Math &amp; Reading</span>
+          <span className="font-medium block">Sofia L.</span>
+          <span className="text-[12px] text-[#5B6472] block">
+            Math &amp; Reading
+          </span>
         </span>
-        <span className="t">{fmt(sofiaTime)}</span>
-      </div>
-      <div className={`kid ${jonahOver ? "warm" : "ok"}`}>
+        <span className="text-[13px] text-[#5B6472] tabular-nums">
+          {fmt(sofiaTime)}
+        </span>
+      </motion.div>
+
+      {/* Jonah card */}
+      <motion.div
+        className={`flex justify-between items-center p-[9px_10px] rounded-lg border text-[14px] mt-1.5 transition-colors duration-500 ${
+          jonahOver
+            ? "bg-[#FDF3E3] border-[#F1D9AC]"
+            : "bg-white border-[#E7E5DF]"
+        }`}
+        initial="hidden"
+        animate={v}
+        variants={{
+          hidden: { opacity: 0, x: -14 },
+          visible: { opacity: 1, x: 0 },
+        }}
+        transition={{
+          x: {
+            duration: 0.55,
+            delay: 0.55,
+            ease: springTight,
+          },
+          opacity: { duration: 0.4, delay: 0.55, ease: "easeOut" },
+        }}
+      >
         <span>
-          <span className="name">Jonah K.</span>
-          <span className="sub">
+          <span className="font-medium block">Jonah K.</span>
+          <span
+            className={`text-[12px] block ${jonahOver ? "text-[#B45309]" : "text-[#5B6472]"}`}
+          >
             {jonahOver ? "Over limit - time to dismiss" : "Math · 30 min limit"}
           </span>
         </span>
-        <span className="t">{fmt(jonahTime)}</span>
-      </div>
+        <span
+          className={`text-[13px] tabular-nums ${jonahOver ? "text-[#B45309] font-medium" : "text-[#5B6472]"}`}
+        >
+          {fmt(jonahTime)}
+        </span>
+      </motion.div>
     </div>
   );
 }

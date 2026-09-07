@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
+import { MotionConfig } from "framer-motion";
+import { StepProvider } from "@/lib/step-context";
 
 interface SyncedStepsProps {
   children: React.ReactNode;
@@ -18,31 +20,21 @@ export default function SyncedSteps({
   const ref = useRef<HTMLDivElement>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const visibleRef = useRef(false);
-
-  const getSteps = useCallback(() => {
-    if (!ref.current) return [];
-    return Array.from(ref.current.querySelectorAll<HTMLElement>(".step"));
-  }, []);
+  const [active, setActive] = useState(false);
 
   const loop = useCallback(() => {
     if (!visibleRef.current) return;
-    const steps = getSteps();
 
-    // Add "in" to all steps at once
-    steps.forEach((s) => s.classList.add("in"));
+    setActive(true);
 
     timerRef.current = setTimeout(() => {
-      // Remove "in" from all steps at once
-      steps.forEach((s) => {
-        s.classList.remove("in");
-        void s.offsetWidth; // force reflow per element
-      });
+      setActive(false);
 
       timerRef.current = setTimeout(() => {
         if (visibleRef.current) loop();
       }, resetDuration);
     }, playDuration + holdDuration);
-  }, [playDuration, holdDuration, resetDuration, getSteps]);
+  }, [playDuration, holdDuration, resetDuration]);
 
   useEffect(() => {
     const el = ref.current;
@@ -57,11 +49,11 @@ export default function SyncedSteps({
           } else if (!e.isIntersecting) {
             visibleRef.current = false;
             if (timerRef.current) clearTimeout(timerRef.current);
-            getSteps().forEach((s) => s.classList.remove("in"));
+            setActive(false);
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     obs.observe(el);
@@ -69,11 +61,18 @@ export default function SyncedSteps({
       obs.disconnect();
       if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, [loop, getSteps]);
+  }, [loop]);
 
   return (
-    <div ref={ref} className="steps">
-      {children}
-    </div>
+    <MotionConfig reducedMotion="user">
+      <StepProvider value={active}>
+        <div
+          ref={ref}
+          className="grid grid-cols-3 gap-7 mt-12 max-[920px]:grid-cols-1"
+        >
+          {children}
+        </div>
+      </StepProvider>
+    </MotionConfig>
   );
 }

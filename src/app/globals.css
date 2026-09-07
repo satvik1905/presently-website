@@ -1421,7 +1421,7 @@ blockquote {
   padding-top: 16px;
   padding-bottom: 16px;
   font-size: 13px;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.7);
 }
 @media (max-width: 600px) {
   .footer-main { flex-direction: column; gap: 32px; }

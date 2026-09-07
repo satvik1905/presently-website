@@ -1989,3 +1989,13 @@ blockquote {
   .live-pip { animation: none; }
   html { scroll-behavior: auto; }
 }
+
+/* ── Print ── */
+@media print {
+  body { background: white !important; color: black !important; }
+  article a[href]:not([href^="#"])::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    word-break: break-all;
+  }
+}

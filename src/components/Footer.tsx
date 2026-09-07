@@ -36,7 +36,13 @@ export default function Footer() {
 
       <div className="footer-bar">
         <div className="wrap !px-0 footer-bar-inner">
-          <span>&copy; 2026 Presently. All rights reserved.</span>
+          <span>
+            &copy; 2026 Presently. All rights reserved.
+            &ensp;&middot;&ensp;
+            <a href="/privacy" className="hover:text-white transition-colors">Privacy</a>
+            &ensp;&middot;&ensp;
+            <a href="/terms" className="hover:text-white transition-colors">Terms</a>
+          </span>
         </div>
       </div>
     </footer>

@@ -308,10 +308,6 @@ export default function TermsPage() {
         </h2>
         <p className={p}>
           Presently LLC
-          <br />
-          3850 Rio Rd Apt 21
-          <br />
-          Carmel, CA 93923
         </p>
         <p className={p}>
           Email:{" "}

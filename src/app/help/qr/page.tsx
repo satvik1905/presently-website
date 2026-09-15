@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import HelpLayout from "@/components/HelpLayout";
 
 export const metadata: Metadata = {
   title: "How to print QR codes – Help – Presently",
@@ -23,7 +22,7 @@ function Tip({ children }: { children: React.ReactNode }) {
 
 export default function HelpQrPage() {
   return (
-    <HelpLayout>
+    <>
       {/* Guide title */}
       <div className="flex items-start gap-2.5 mb-2">
         <svg
@@ -206,6 +205,6 @@ export default function HelpQrPage() {
           </Tip>
         </div>
       </div>
-    </HelpLayout>
+    </>
   );
 }

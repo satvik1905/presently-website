@@ -1,12 +1,13 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import Link from "next/link";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const guides = [
-  { href: "/help-qr", label: "How to print QR codes" },
-  { href: "/help-tutorial", label: "How to import students from the Kumon system (KSIS)" },
+  { href: "/help/qr", label: "How to print QR codes" },
+  { href: "/help/tutorial", label: "How to import students from the Kumon system (KSIS)" },
 ];
 
 export default function HelpLayout({ children }: { children: React.ReactNode }) {
@@ -35,7 +36,7 @@ export default function HelpLayout({ children }: { children: React.ReactNode }) 
               <ul className="space-y-1">
                 {guides.map((g) => (
                   <li key={g.href}>
-                    <a
+                    <Link
                       href={g.href}
                       className={`block rounded-lg px-3 py-2.5 text-[13.5px] leading-snug transition-colors ${
                         pathname === g.href
@@ -44,7 +45,7 @@ export default function HelpLayout({ children }: { children: React.ReactNode }) 
                       }`}
                     >
                       {g.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

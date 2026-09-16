@@ -36,7 +36,7 @@ export default function PrivacyPage() {
     <LegalLayout
       title="Privacy Policy"
       effectiveDate="September 6, 2026"
-      lastUpdated="September 6, 2026"
+      lastUpdated="September 16, 2026"
       sections={sections}
       crossLink={{ href: "/terms", label: "Terms of Service" }}
     >
@@ -70,20 +70,30 @@ export default function PrivacyPage() {
         </h2>
         <ul className={ul}>
           <li>
-            End users opt in by texting START to{" "}
+            Program: Presently sends text messages to guardians on behalf of
+            their child&rsquo;s learning center, including check-in and
+            check-out alerts, center closure notices, homework reminders,
+            progress review scheduling, and messages from center staff.
+          </li>
+          <li>
+            How to opt in: guardians opt in by texting START to{" "}
             <strong className="text-slate-900">+1 (831) 298-8368</strong>.
           </li>
-          <li>
-            Message frequency: messages are sent only when a student checks in
-            or checks out — typically up to 2 messages per student on each day
-            the student attends. Attendance days are set by each center.
-            Guardians with more than one enrolled student receive more.
-          </li>
+          <li>Message frequency varies.</li>
           <li>Message and data rates may apply.</li>
-          <li>Reply STOP to opt out, HELP for help.</li>
           <li>
-            Presently LLC does not sell, rent, or share mobile numbers with
-            third parties or affiliates for marketing purposes.
+            Reply STOP to opt out at any time. Reply HELP for help, or
+            contact{" "}
+            <a href="mailto:admin@presently.now" className={link}>
+              admin@presently.now
+            </a>{" "}
+            or (408) 409-4093.
+          </li>
+          <li>
+            No mobile information will be shared with third parties or
+            affiliates for marketing or promotional purposes. Text messaging
+            originator opt-in data and consent will not be shared with any
+            third parties.
           </li>
           <li>
             Guardians may reply to messages; replies are stored and shown to

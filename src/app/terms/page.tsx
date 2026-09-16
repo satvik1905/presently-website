@@ -39,7 +39,7 @@ export default function TermsPage() {
     <LegalLayout
       title="Terms of Service"
       effectiveDate="September 6, 2026"
-      lastUpdated="September 6, 2026"
+      lastUpdated="September 16, 2026"
       sections={sections}
       crossLink={{ href: "/privacy", label: "Privacy Policy" }}
     >
@@ -78,23 +78,32 @@ export default function TermsPage() {
         </h2>
         <ul className={ul}>
           <li>
-            Program description: check-in and check-out notifications to
-            guardians the center has enabled.
+            Program description: Presently sends text messages to guardians on
+            behalf of their child&rsquo;s learning center, including check-in
+            and check-out alerts, center closure notices, homework reminders,
+            progress review scheduling, and messages from center staff.
           </li>
           <li>
-            End users opt in by texting START to{" "}
+            How to opt in: guardians opt in by texting START to{" "}
             <strong className="text-slate-900">+1 (831) 298-8368</strong>.
           </li>
-          <li>
-
-            Message frequency: messages are sent only when a student checks
-            in or checks out — typically up to 2 messages per student on
-            each day the student attends. Attendance days are set by each
-            center. Guardians with more than one enrolled student receive
-            more.
-          </li>
+          <li>Message frequency varies.</li>
           <li>Message and data rates may apply.</li>
-          <li>Reply STOP to opt out, HELP for help.</li>
+          <li>
+            Reply STOP to opt out at any time. You will receive one
+            confirmation message.
+          </li>
+          <li>
+            Reply HELP for help, or contact{" "}
+            <a href="mailto:admin@presently.now" className={link}>
+              admin@presently.now
+            </a>{" "}
+            or (408) 409-4093.
+          </li>
+          <li>
+            Consent to receive text messages is not a condition of enrollment
+            or purchase.
+          </li>
           <li>
             Mobile carriers are not liable for delayed or undelivered messages.
           </li>
@@ -108,9 +117,10 @@ export default function TermsPage() {
         </h2>
         <p className={p}>
           The center represents that it has authority to provide the student and
-          guardian information it enters into the Service, and that it has
-          obtained the consent required to send text notifications to the
-          numbers it supplies.
+          guardian information it enters into the Service. Text messages are
+          sent only to guardians who have opted in themselves by texting START
+          to{" "}
+          <strong className="text-slate-900">+1 (831) 298-8368</strong>.
         </p>
         <p className={p}>
           The center indemnifies Presently LLC against any claims, losses, or

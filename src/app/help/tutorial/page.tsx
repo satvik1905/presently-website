@@ -41,10 +41,21 @@ export default function HelpTutorialPage() {
         How to import students from the Kumon system (KSIS)
       </h1>
       <p className="flex items-center gap-1.5 text-[14px] text-slate-500 mb-10">
-        <svg className="w-4 h-4 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        <svg
+          className="w-4 h-4 text-slate-400 shrink-0"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
         </svg>
-        Admin only. If you do not see&nbsp;<strong>Import students</strong>, ask an Admin to do this step.
+        Admin only. If you do not see&nbsp;<strong>Import students</strong>, ask
+        an Admin to do this step.
       </p>
 
       {/* Step 1 */}
@@ -56,19 +67,24 @@ export default function HelpTutorialPage() {
           </h3>
         </div>
         <p className="text-[15px] text-slate-600 mb-2 pl-10">
-          Do this in the Kumon system (KSIS), not in Presently. Export these two files and save them on your computer. <strong>Do not change anything in the files.</strong>
+          Do this in the Kumon system (KSIS), not in Presently. Export these two
+          files and save them on your computer.{" "}
+          <strong>Do not change anything in the files.</strong>
         </p>
         <ul className="list-disc pl-16 text-[15px] text-slate-600 space-y-1.5 mb-5">
           <li>
-            <strong>Report B</strong> as Excel (.xlsx) &mdash; Math, Reading, and EFL (or another third subject)
+            <strong>Report B</strong> as Excel (.xlsx) &mdash; Math, Reading,
+            and EFL (or another third subject)
           </li>
           <li>
-            <strong>Student Report</strong> as Excel &mdash; mother/father names, cell phones, and address
+            <strong>Student Report</strong> as Excel (.xlsx) &mdash;
+            Mother/Father names, cell phones, and address
           </li>
         </ul>
         <div className="pl-10">
           <Tip>
-            Report B alone cannot fill guardian or phone. The Student Report alone cannot fill subjects. Use both.
+            Report B alone cannot fill guardian or phone. The Student Report
+            alone cannot fill subjects. Use both.
           </Tip>
         </div>
       </div>
@@ -90,13 +106,28 @@ export default function HelpTutorialPage() {
             className="text-[#2563EB] underline underline-offset-2 hover:text-[#1D4ED8]"
           >
             portal.presently.now
-            <svg className="inline-block w-3.5 h-3.5 ml-0.5 -mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            <svg
+              className="inline-block w-3.5 h-3.5 ml-0.5 -mt-0.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              />
             </svg>
           </a>{" "}
-          and sign in with your admin credentials. Skip this if you are already signed in.
+          and sign in with your admin credentials. Skip this if you are already
+          signed in.
         </p>
-        <img src="/images/help-tutorial/sign-in.png" alt="Presently sign-in screen showing email and password fields" className="ml-10 rounded-xl border border-slate-200" />
+        <img
+          src="/images/help-tutorial/sign-in.png"
+          alt="Presently sign-in screen showing email and password fields"
+          className="ml-10 rounded-xl border border-slate-200"
+        />
       </div>
 
       {/* Step 3 */}
@@ -108,9 +139,14 @@ export default function HelpTutorialPage() {
           </h3>
         </div>
         <p className="text-[15px] text-slate-600 mb-6 pl-10">
-          Open <strong>Students</strong> (1). Click <strong>Import students</strong> at the top right (2).
+          Open <strong>Students</strong> (1). Click{" "}
+          <strong>Import students</strong> at the top right (2).
         </p>
-        <img src="/images/help-tutorial/import-students.png" alt="Students page with Import students button highlighted at top right" className="ml-10 rounded-xl border border-slate-200" />
+        <img
+          src="/images/help-tutorial/import-students.png"
+          alt="Students page with Import students button highlighted at top right"
+          className="ml-10 rounded-xl border border-slate-200"
+        />
       </div>
 
       {/* Step 4 */}
@@ -122,13 +158,16 @@ export default function HelpTutorialPage() {
           </h3>
         </div>
         <p className="text-[15px] text-slate-600 mb-6 pl-10">
-          Drop the Report B file into the dashed box, or click the box and choose the file. Then click <strong>Continue</strong>.
+          Drop the Report B file into the dashed box, or click the box and
+          choose the file. Then click <strong>Continue</strong>.
         </p>
-        <img src="/images/help-tutorial/drop-report-b.png" alt="Import dialog showing Report B file upload area" className="ml-10 rounded-xl border border-slate-200 mb-5" />
+        <img
+          src="/images/help-tutorial/drop-report-b.png"
+          alt="Import dialog showing Report B file upload area"
+          className="ml-10 rounded-xl border border-slate-200 mb-5"
+        />
         <div className="pl-10">
-          <Tip>
-            Maximum 2MB or 500 students per file.
-          </Tip>
+          <Tip>Maximum 2MB or 500 students per file.</Tip>
         </div>
       </div>
 
@@ -141,9 +180,14 @@ export default function HelpTutorialPage() {
           </h3>
         </div>
         <p className="text-[15px] text-slate-600 mb-6 pl-10">
-          The system matches the columns automatically. Check that Student ID, names, and Subject look right, then click <strong>Continue</strong>.
+          The system matches the columns automatically. Check that Student ID,
+          names, and Subject look right, then click <strong>Continue</strong>.
         </p>
-        <img src="/images/help-tutorial/map-report-b.png" alt="Column mapping for Report B with arrows showing file columns matched to system fields" className="ml-10 rounded-xl border border-slate-200" />
+        <img
+          src="/images/help-tutorial/map-report-b.png"
+          alt="Column mapping for Report B with arrows showing file columns matched to system fields"
+          className="ml-10 rounded-xl border border-slate-200"
+        />
       </div>
 
       {/* Step 6 */}
@@ -155,9 +199,14 @@ export default function HelpTutorialPage() {
           </h3>
         </div>
         <p className="text-[15px] text-slate-600 mb-6 pl-10">
-          Drop the Student Report file into the dashed box. Then click <strong>Continue</strong>.
+          Drop the Student Report file into the dashed box. Then click{" "}
+          <strong>Continue</strong>.
         </p>
-        <img src="/images/help-tutorial/drop-student-report.png" alt="Import dialog showing Student Report file upload area" className="ml-10 rounded-xl border border-slate-200" />
+        <img
+          src="/images/help-tutorial/drop-student-report.png"
+          alt="Import dialog showing Student Report file upload area"
+          className="ml-10 rounded-xl border border-slate-200"
+        />
       </div>
 
       {/* Step 7 */}
@@ -169,12 +218,18 @@ export default function HelpTutorialPage() {
           </h3>
         </div>
         <p className="text-[15px] text-slate-600 mb-6 pl-10">
-          The system matches mother, father, phones, and address automatically. Confirm they look right, then click <strong>Continue</strong>.
+          The system matches mother, father, phones, and address automatically.
+          Confirm they look right, then click <strong>Continue</strong>.
         </p>
-        <img src="/images/help-tutorial/map-student-report.png" alt="Column mapping for Student Report with arrows showing file columns matched to system fields" className="ml-10 rounded-xl border border-slate-200 mb-5" />
+        <img
+          src="/images/help-tutorial/map-student-report.png"
+          alt="Column mapping for Student Report with arrows showing file columns matched to system fields"
+          className="ml-10 rounded-xl border border-slate-200 mb-5"
+        />
         <div className="pl-10">
           <Tip>
-            If a column is still on Skip, use the dropdown &mdash; Address, Mother cell phone, and Father cell phone are all listed.
+            If a column is still on Skip, use the dropdown &mdash; Address,
+            Mother cell phone, and Father cell phone are all listed.
           </Tip>
         </div>
       </div>
@@ -188,14 +243,26 @@ export default function HelpTutorialPage() {
           </h3>
         </div>
         <p className="text-[15px] text-slate-600 mb-2 pl-10">
-          The review page shows everything extracted from both files. Look at the <strong>Action</strong> column, then click <strong>Continue</strong>.
+          The review page shows everything extracted from both files. Look at
+          the <strong>Action</strong> column, then click{" "}
+          <strong>Continue</strong>.
         </p>
         <ul className="list-disc pl-16 text-[15px] text-slate-600 space-y-1.5 mb-6">
-          <li><strong>New</strong> &mdash; new Student ID</li>
-          <li><strong>Update</strong> &mdash; Student ID already in this center</li>
-          <li><strong>Skip</strong> &mdash; left alone (missing name or ID)</li>
+          <li>
+            <strong>New</strong> &mdash; new Student ID
+          </li>
+          <li>
+            <strong>Update</strong> &mdash; Student ID already in this center
+          </li>
+          <li>
+            <strong>Skip</strong> &mdash; left alone (missing name or ID)
+          </li>
         </ul>
-        <img src="/images/help-tutorial/review-list.png" alt="Review table showing imported students with Action column" className="ml-10 rounded-xl border border-slate-200" />
+        <img
+          src="/images/help-tutorial/review-list.png"
+          alt="Review table showing imported students with Action column"
+          className="ml-10 rounded-xl border border-slate-200"
+        />
       </div>
 
       {/* Step 9 */}
@@ -207,12 +274,18 @@ export default function HelpTutorialPage() {
           </h3>
         </div>
         <p className="text-[15px] text-slate-600 mb-6 pl-10">
-          The last page shows how many students will be added or updated. Click <strong>Confirm and Add</strong> in the bottom right.
+          The last page shows how many students will be added or updated. Click{" "}
+          <strong>Confirm and Add</strong> in the bottom right.
         </p>
-        <img src="/images/help-tutorial/confirm-add.png" alt="Confirm and Add dialog showing import summary" className="ml-10 rounded-xl border border-slate-200 mb-5" />
+        <img
+          src="/images/help-tutorial/confirm-add.png"
+          alt="Confirm and Add dialog showing import summary"
+          className="ml-10 rounded-xl border border-slate-200 mb-5"
+        />
         <div className="pl-10">
           <Tip>
-            After it finishes, open a few students and check subject (Math, Reading, EFL), guardian, and address.
+            After it finishes, open a few students and check subject (Math,
+            Reading, EFL), guardian, and address.
           </Tip>
         </div>
       </div>

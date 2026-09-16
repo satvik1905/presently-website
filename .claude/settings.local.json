@@ -13,7 +13,17 @@
       "Bash(gh pr:*)",
       "Bash(brew list:*)",
       "Bash(git checkout:*)",
-      "Bash(git merge qa --no-ff -m ':*)"
+      "Bash(git merge qa --no-ff -m ':*)",
+      "Bash(find src:*)",
+      "Bash(grep -v '^$')",
+      "Bash(npx tailwindcss:*)",
+      "Bash(wc -l /Users/satvikkhopkar/Desktop/presently-website/src/components/*.tsx)",
+      "Bash(grep -l \"use client\\\\|export default\" /Users/satvikkhopkar/Desktop/presently-website/src/components/*.tsx)",
+      "Bash(ls /Users/satvikkhopkar/Desktop/presently-website/public/favicon* /Users/satvikkhopkar/Desktop/presently-website/public/apple-touch-icon* /Users/satvikkhopkar/Desktop/presently-website/public/android-chrome*)",
+      "Bash(xargs ls:*)",
+      "Bash(awk '/^\\\\/\\\\* ── Step Vignettes/,/^\\\\/\\\\* ── Vignette Reduced Motion/' /Users/satvikkhopkar/Desktop/presently-website/src/app/globals.css)",
+      "Bash(awk '/^\\\\/\\\\* ── Vignette Reduced Motion/,/^\\\\/\\\\* ── Features/' /Users/satvikkhopkar/Desktop/presently-website/src/app/globals.css)",
+      "Bash(ls:*)"
     ]
   }
 }

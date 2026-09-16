@@ -18,15 +18,6 @@ export default function HelpLayout({ children }: { children: React.ReactNode }) 
       <Navbar variant="home" />
       <main className="bg-white min-h-screen">
         <div className="mx-auto max-w-[1120px] px-6 py-16 md:py-20">
-          <header className="mb-10">
-            <h1 className="text-[28px] font-semibold tracking-[-0.02em] text-slate-900 leading-[1.15]">
-              Help
-            </h1>
-            <p className="mt-2 text-[15px] text-slate-500">
-              Open a guide. If a screen does not match, stop and ask your center admin.
-            </p>
-          </header>
-
           <div className="lg:flex lg:gap-0">
             {/* Sidebar */}
             <nav className="mb-8 lg:mb-0 lg:w-[240px] lg:shrink-0 lg:sticky lg:top-[88px] lg:self-start">

@@ -12,7 +12,7 @@ export default async function PartnerPage() {
       <Navbar links={[{ label: "How it works", href: "/#how" }, { label: "See it in action", href: "/see-it-in-action" }, { label: "Demo", href: "/#demo" }]} />
       <main>
         {/* Hero */}
-        <section className="pt-[100px] pb-6 text-center">
+        <section className="pt-[100px] pb-[40px] text-center">
           <div className="wrap">
             <h2 className="font-semibold text-[clamp(26px,3vw,36px)] leading-[1.15] tracking-[-0.02em] mx-auto mb-2 !max-w-none">
               Choose your plan

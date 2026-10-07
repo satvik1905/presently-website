@@ -1,149 +1,117 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "How to upload monthly reports – Help – Presently",
+  title: "Monthly Uploading – Help – Presently",
 };
-
-function StepNumber({ n }: { n: number }) {
-  return (
-    <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-[#2563EB] text-white text-[14px] font-semibold shrink-0">
-      {n}
-    </span>
-  );
-}
-
-function Tip({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="rounded-lg border border-slate-200 bg-slate-50 px-5 py-3.5 text-[14px] text-slate-600 leading-relaxed">
-      {children}
-    </div>
-  );
-}
 
 export default function HelpTutorialUploadingPage() {
   return (
     <>
-      {/* Guide title */}
-      <h1 className="flex items-center gap-2.5 text-[24px] font-semibold tracking-[-0.02em] text-slate-900 mb-2">
-        <svg
-          className="w-5 h-5 text-[#2563EB] shrink-0"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-          />
-        </svg>
-        How to upload monthly reports
+      {/* Page title */}
+      <h1 className="text-[28px] font-semibold tracking-[-0.02em] text-slate-900 mb-3">
+        Monthly Uploading
       </h1>
-      <p className="flex items-center gap-1.5 text-[14px] text-slate-500 mb-10">
-        <svg
-          className="w-4 h-4 text-slate-400 shrink-0"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-        Takes about 5 minutes
+      <p className="text-[16px] text-slate-600 mb-14">
+        What happens monthly after the Initial Reports (Report B and Student
+        Profiles) have been submitted?
       </p>
 
-      {/* Step 1 */}
+      {/* Background */}
       <div className="mb-14">
-        <div className="flex items-center gap-3 mb-3">
-          <StepNumber n={1} />
-          <h3 className="text-[17px] font-semibold text-slate-900">
-            Placeholder step title
-          </h3>
-        </div>
-        <p className="text-[15px] text-slate-600 mb-6 pl-10">
-          Placeholder description for step 1.
-        </p>
+        <h2 className="text-[20px] font-semibold text-slate-900 mb-4">
+          Background
+        </h2>
+        <ul className="list-disc pl-6 text-[15px] text-slate-600 space-y-3">
+          <li>
+            When first setting up the Presently Portal you were asked to upload
+            Report B and Student Profile. This is a{" "}
+            <strong>one time</strong> upload.
+          </li>
+          <li>
+            Once this step has taken place, it is now a case of keeping the list
+            of students current.
+          </li>
+          <li>
+            To do that we just want the new enrollments added. Old students will
+            automatically become inactivated after 60 days.
+          </li>
+          <li>
+            The easiest way to add new students is via the{" "}
+            <strong>e-enrollment</strong> form.
+          </li>
+        </ul>
+      </div>
+
+      {/* The eEnrollment document */}
+      <div className="mb-14">
+        <h2 className="text-[20px] font-semibold text-slate-900 mb-4">
+          The eEnrollment document
+        </h2>
+        <ul className="list-disc pl-6 text-[15px] text-slate-600 space-y-3 mb-6">
+          <li>The form downloads in PDF format.</li>
+          <li>Simply upload this document into Presently.</li>
+          <li>This is the form filled by the parents themselves.</li>
+        </ul>
         <img
-          src="/images/help-tutorial-uploading/step-1.png"
-          alt="Step 1 screenshot"
-          className="ml-10 rounded-xl border border-slate-200"
+          src="/images/help-tutorial-uploading/eenrollment-document.png"
+          alt="Example of the eEnrollment PDF document"
+          className="rounded-xl border border-slate-200"
         />
       </div>
 
-      {/* Step 2 */}
+      {/* Locating the eEnrollment form */}
       <div className="mb-14">
-        <div className="flex items-center gap-3 mb-3">
-          <StepNumber n={2} />
-          <h3 className="text-[17px] font-semibold text-slate-900">
-            Placeholder step title
-          </h3>
-        </div>
-        <p className="text-[15px] text-slate-600 mb-6 pl-10">
-          Placeholder description for step 2.
+        <h2 className="text-[20px] font-semibold text-slate-900 mb-4">
+          Locating the eEnrollment form
+        </h2>
+        <p className="text-[15px] text-slate-600 mb-3">
+          You can find the e-enrollment form by following these steps:
         </p>
+        <ol className="list-decimal pl-6 text-[15px] text-slate-600 space-y-2 mb-6">
+          <li>
+            Log in to <strong>iKumon.com</strong>
+          </li>
+          <li>
+            In the far right column, click{" "}
+            <strong>eEnrollment</strong>{" "}
+            <span className="text-red-500 font-semibold">(1)</span>
+          </li>
+          <li>
+            Under <strong>View Notice to parents</strong>{" "}
+            <span className="text-red-500 font-semibold">(2)</span>
+          </li>
+          <li>Click the arrow with the envelope</li>
+          <li>
+            Download the file for each new enrollee{" "}
+            <span className="text-red-500 font-semibold">(3)</span>
+          </li>
+        </ol>
         <img
-          src="/images/help-tutorial-uploading/step-2.png"
-          alt="Step 2 screenshot"
-          className="ml-10 rounded-xl border border-slate-200"
+          src="/images/help-tutorial-uploading/locating-eenrollment-1.png"
+          alt="iKumon interface showing how to locate the eEnrollment form"
+          className="rounded-xl border border-slate-200 mb-5"
+        />
+        <img
+          src="/images/help-tutorial-uploading/locating-eenrollment-2.png"
+          alt="iKumon interface showing the eEnrollment download step"
+          className="rounded-xl border border-slate-200"
         />
       </div>
 
-      {/* Step 3 */}
-      <div className="mb-14">
-        <div className="flex items-center gap-3 mb-3">
-          <StepNumber n={3} />
-          <h3 className="text-[17px] font-semibold text-slate-900">
-            Placeholder step title
-          </h3>
-        </div>
-        <p className="text-[15px] text-slate-600 mb-6 pl-10">
-          Placeholder description for step 3.
-        </p>
-        <img
-          src="/images/help-tutorial-uploading/step-3.png"
-          alt="Step 3 screenshot"
-          className="ml-10 rounded-xl border border-slate-200"
-        />
-      </div>
-
-      {/* Step 4 */}
-      <div className="mb-14">
-        <div className="flex items-center gap-3 mb-3">
-          <StepNumber n={4} />
-          <h3 className="text-[17px] font-semibold text-slate-900">
-            Placeholder step title
-          </h3>
-        </div>
-        <p className="text-[15px] text-slate-600 mb-6 pl-10">
-          Placeholder description for step 4.
-        </p>
-        <img
-          src="/images/help-tutorial-uploading/step-4.png"
-          alt="Step 4 screenshot"
-          className="ml-10 rounded-xl border border-slate-200"
-        />
-      </div>
-
-      {/* Step 5 */}
+      {/* Document drop into Presently */}
       <div className="mb-4">
-        <div className="flex items-center gap-3 mb-3">
-          <StepNumber n={5} />
-          <h3 className="text-[17px] font-semibold text-slate-900">
-            Placeholder step title
-          </h3>
-        </div>
-        <p className="text-[15px] text-slate-600 mb-6 pl-10">
-          Placeholder description for step 5.
+        <h2 className="text-[20px] font-semibold text-slate-900 mb-4">
+          Document drop into Presently
+        </h2>
+        <p className="text-[15px] text-slate-600 mb-6">
+          Once you have downloaded the eEnrollment PDF for each new student,
+          upload it directly into Presently. The system will automatically
+          extract the student&rsquo;s information from the form.
         </p>
         <img
-          src="/images/help-tutorial-uploading/step-5.png"
-          alt="Step 5 screenshot"
-          className="ml-10 rounded-xl border border-slate-200"
+          src="/images/help-tutorial-uploading/document-drop.png"
+          alt="Presently interface showing the document upload area"
+          className="rounded-xl border border-slate-200"
         />
       </div>
     </>

@@ -79,9 +79,9 @@ export async function POST(req: Request) {
         ? { discounts: [{ promotion_code: promotionCodeId }] }
         : { allow_promotion_codes: true }),
       customer_email: customerEmail,
-      metadata: { centerName, customerName, center_address, center_street, center_city, center_state, center_zip },
+      metadata: { plan, billing, centerName, customerName, center_address, center_street, center_city, center_state, center_zip },
       subscription_data: {
-        metadata: { centerName, customerName, center_address, center_street, center_city, center_state, center_zip },
+        metadata: { plan, billing, centerName, customerName, center_address, center_street, center_city, center_state, center_zip },
       },
       success_url: `${baseUrl}/partner/welcome?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${baseUrl}/partner`,

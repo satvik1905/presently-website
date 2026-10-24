@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="bg-[#0F1219] text-white/60">
-      <div className="max-w-[1120px] mx-auto flex justify-between items-start gap-10 py-14 max-[600px]:flex-col max-[600px]:gap-8">
+      <div className="max-w-[1120px] mx-auto px-6 flex justify-between items-start gap-10 py-14 max-[600px]:flex-col max-[600px]:gap-8">
         <div className="flex flex-col gap-3">
           <a
             className="flex items-center gap-[9px] font-bold text-[19px] text-white/90 hover:text-white"
@@ -38,7 +38,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/[0.08]">
-        <div className="max-w-[1120px] mx-auto flex justify-center items-center py-4 text-[13px] text-white/70">
+        <div className="max-w-[1120px] mx-auto px-6 flex justify-center items-center py-4 text-[13px] text-white/70">
           <span>
             &copy; 2026 Presently. All rights reserved.
             &ensp;&middot;&ensp;

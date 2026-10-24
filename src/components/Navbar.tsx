@@ -19,7 +19,7 @@ export default function Navbar({ links, variant = "default" }: NavbarProps) {
           : "bg-white border-[#E7E5DF]"
       }`}
     >
-      <div className="max-w-[1120px] mx-auto flex items-center justify-between h-[68px]">
+      <div className="max-w-[1120px] mx-auto px-6 flex items-center justify-between h-[68px]">
         <a
           className="font-bold text-[21px] tracking-[-0.02em] flex items-center gap-[9px]"
           href="/"

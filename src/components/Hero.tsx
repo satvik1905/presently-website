@@ -4,7 +4,7 @@ import HeroCarousel from "./HeroCarousel";
 export default function Hero() {
   return (
     <section className="min-h-[calc(100vh-68px)] flex items-center py-12">
-      <div className="max-w-[1120px] mx-auto grid grid-cols-[1.05fr_1fr] gap-14 items-center max-[920px]:grid-cols-1 max-[920px]:gap-10">
+      <div className="max-w-[1120px] mx-auto px-6 grid grid-cols-[1.05fr_1fr] gap-14 items-center max-[920px]:grid-cols-1 max-[920px]:gap-10">
         <div>
           <span className="stamp">BUILT FOR THE WAY KUMON CENTERS RUN</span>
           <h1>

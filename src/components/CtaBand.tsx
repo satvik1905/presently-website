@@ -3,7 +3,7 @@ import CtaForm from "./CtaForm";
 export default function CtaBand() {
   return (
     <section id="demo" className="tinted">
-      <div className="wrap !px-0">
+      <div className="wrap">
         <div className="grid grid-cols-2 items-center max-[800px]:grid-cols-1">
           <div className="flex flex-col justify-center py-14 pr-12 max-[800px]:p-0 max-[800px]:pb-8">
             <span className="stamp">STOP WONDERING WHO&rsquo;S STILL HERE</span>

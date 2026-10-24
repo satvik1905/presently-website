@@ -6,7 +6,7 @@ import VigBoard from "./VigBoard";
 export default function HowItWorks() {
   return (
     <section className="tinted" id="how">
-      <div className="wrap !px-0">
+      <div className="wrap">
         <span className="stamp">ONE AFTERNOON AT YOUR CENTER</span>
         <h2>
           From scan-in to the last dismissal, without a clipboard.

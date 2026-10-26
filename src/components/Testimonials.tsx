@@ -6,14 +6,14 @@ const testimonials = [
     quote:
       "What initially began as a solution to meet risk management requirements quickly evolved into something much more valuable. Presently has become an integral part of our daily operations, allowing us to track student attendance, monitor time spent in class, manage student flow, and keep parents informed through automated check-in and check-out notifications—all in one place. What has impressed us most is the responsiveness of the Presently team. Our feedback hasn't simply been collected—it's been heard, evaluated, and translated into meaningful improvements that address real challenges we encounter during class.\n\nThis experience gave us the confidence to embrace a platform that could genuinely enhance our center operations. Perhaps the most rewarding part of our Alpha Testing experience was the opportunity to connect 10 fellow Kumon instructors with Presently's Pilot Program. Having instructors with different center operations, experiences, and perspectives collectively test and refine the same platform has been particularly valuable. With another 50 instructors being invited to participate, there is an even greater opportunity for Presently to benefit from the collective insights of those using it every day.",
     name: "Stuti Desai",
-    title: "Kumon of Carmel, ICPC Member 2026",
+    title: "Kumon of Carmel",
     initials: "SD",
   },
   {
     quote:
       "Working with the Presently team has been a wonderful experience. Their platform has helped us improve classroom organization, monitor student attendance, and manage our daily operations more efficiently. We appreciate the team's responsiveness, willingness to listen to feedback, and commitment to making improvements that support our needs. It has been a pleasure working with a team that truly values its customers. Thank you for your continued support!",
     name: "Bijal Patel",
-    title: "Kumon of Victorville, Current ICPC Member",
+    title: "Kumon of Victorville",
     initials: "BP",
   },
   {
